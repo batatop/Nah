@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import Rebase from 're-base'
 
 const config = {
     apiKey: "AIzaSyDZfj-5pcE96pXIxTgx-CCbbewz23ug8lk",
@@ -6,7 +7,8 @@ const config = {
     databaseURL: "https://nahproject-83bdd.firebaseio.com"
 }
 
-firebase.initializeApp(config)
+var app = firebase.initializeApp(config)
 
 export const ref = firebase.database().ref()
 export const firebaseAuth = firebase.auth
+export const base = Rebase.createClass(app.database())

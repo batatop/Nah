@@ -1,7 +1,10 @@
 export const style = {
     container: {
         position: "absolute",
-        backgroundColor: "#cfd8dc",
+        backgroundColor: "#f5f5f5",
+        borderRadius: '7px',
+        border: '2px solid #e8e8e8',
+        boxShadow: '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)',
         width: '80%',
         top: "5%",
         left: "10%",
@@ -31,7 +34,8 @@ export const style = {
     },
 
     sidebar: {
-        backgroundColor: "#b0bec5"
+        backgroundColor: "#f0f0f0",
+        boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)'
     },
 
     content: {
@@ -52,7 +56,7 @@ export const style = {
     productList: {
         backgroundColor: "white",
         margin: "0 0 10px 0",
-        boxShadow: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)"
+        boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)'
     },
 
     dashboardViewButtons: {

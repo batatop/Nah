@@ -1,11 +1,21 @@
 import React from "react";
+import createReactClass from 'create-react-class';
 import { style } from '../../css/styles.js'
 import { Grid, Cell, Card, CardTitle, CardText, CardActions, Button, ProgressBar, IconButton, List, ListItem, ListItemContent, ListItemAction } from 'react-mdl';
+import { base } from '../../config/constants'
 
-export default class Featured extends React.Component {
+var Dashboard = createReactClass({
     componentWillMount() {
-        this.setState({view: true});
-    }
+        this.setState({
+            view: true,
+            products: []
+        });
+        base.syncState(`Products`, {
+            context: this,
+            state: 'products',
+            asArray: true
+        });
+    },
 
     handleViewClick(view) {
         if(view === "module"){
@@ -14,7 +24,44 @@ export default class Featured extends React.Component {
         else{
             this.setState({view: false});
         }
-    }
+    },
+
+    mapCardView() {
+        var cardView = this.state.products.map(function(product, i) {
+            return (
+                <Cell key={'Card_'+i} col={4}>
+                    <Card shadow={2} style={style.productModule}>
+                        <CardTitle>
+                            {product.name}<br />
+                            {product.afilliatedPerson}
+                        </CardTitle>
+                        <CardText>
+                            {product.amount}
+                        </CardText>
+                        <CardActions border>
+                            <Button colored>Details</Button>
+                        </CardActions>
+                        <ProgressBar progress={product.progress} />
+                    </Card>
+                </Cell>
+            );
+        });
+        return cardView;
+    },
+
+    mapListView() {
+        var listView = this.state.products.map(function(product, i) {
+            return (
+                <ListItem key={'List_'+i} style={style.productList}>
+                    <ListItemContent>{product.name}</ListItemContent>
+                    <ListItemContent><ProgressBar progress={product.progress}/></ListItemContent>
+                    <ListItemContent>{product.afilliatedPerson}</ListItemContent>
+                    <ListItemAction><IconButton name="arrow_forward" /></ListItemAction>
+                </ListItem>
+            );
+        });
+        return listView;
+    },
 
     render() {
         return (
@@ -27,335 +74,19 @@ export default class Featured extends React.Component {
                     {this.state.view
                         ?
                             <Grid>
-                                <Cell col={4}>
-                                    <Card shadow={2} style={style.productModule}>
-                                        <CardTitle>
-                                            Product<br />
-                                            Afilliated Person
-                                        </CardTitle>
-                                        <CardText>
-                                            stock/in production
-                                        </CardText>
-                                        <CardActions border>
-                                            <Button colored>Details</Button>
-                                        </CardActions>
-                                        <ProgressBar progress={Math.floor((Math.random() * 100))} />
-                                    </Card>
-                                </Cell>
-                                <Cell col={4}>
-                                    <Card shadow={2} style={style.productModule}>
-                                        <CardTitle>
-                                            Product<br />
-                                            Afilliated Person
-                                        </CardTitle>
-                                        <CardText>
-                                            stock/in production
-                                        </CardText>
-                                        <CardActions border>
-                                            <Button colored>Details</Button>
-                                        </CardActions>
-                                        <ProgressBar progress={Math.floor((Math.random() * 100))} />
-                                    </Card>
-                                </Cell>
-                                <Cell col={4}>
-                                    <Card shadow={2} style={style.productModule}>
-                                        <CardTitle>
-                                            Product<br />
-                                            Afilliated Person
-                                        </CardTitle>
-                                        <CardText>
-                                            stock/in production
-                                        </CardText>
-                                        <CardActions border>
-                                            <Button colored>Details</Button>
-                                        </CardActions>
-                                        <ProgressBar progress={Math.floor((Math.random() * 100))} />
-                                    </Card>
-                                </Cell>
-                                <Cell col={4}>
-                                    <Card shadow={2} style={style.productModule}>
-                                        <CardTitle>
-                                            Product<br />
-                                            Afilliated Person
-                                        </CardTitle>
-                                        <CardText>
-                                            stock/in production
-                                        </CardText>
-                                        <CardActions border>
-                                            <Button colored>Details</Button>
-                                        </CardActions>
-                                        <ProgressBar progress={Math.floor((Math.random() * 100))} />
-                                    </Card>
-                                </Cell>
-                                <Cell col={4}>
-                                    <Card shadow={2} style={style.productModule}>
-                                        <CardTitle>
-                                            Product<br />
-                                            Afilliated Person
-                                        </CardTitle>
-                                        <CardText>
-                                            stock/in production
-                                        </CardText>
-                                        <CardActions border>
-                                            <Button colored>Details</Button>
-                                        </CardActions>
-                                        <ProgressBar progress={Math.floor((Math.random() * 100))} />
-                                    </Card>
-                                </Cell>
-                                <Cell col={4}>
-                                    <Card shadow={2} style={style.productModule}>
-                                        <CardTitle>
-                                            Product<br />
-                                            Afilliated Person
-                                        </CardTitle>
-                                        <CardText>
-                                            stock/in production
-                                        </CardText>
-                                        <CardActions border>
-                                            <Button colored>Details</Button>
-                                        </CardActions>
-                                        <ProgressBar progress={Math.floor((Math.random() * 100))} />
-                                    </Card>
-                                </Cell>
-                                <Cell col={4}>
-                                    <Card shadow={2} style={style.productModule}>
-                                        <CardTitle>
-                                            Product<br />
-                                            Afilliated Person
-                                        </CardTitle>
-                                        <CardText>
-                                            stock/in production
-                                        </CardText>
-                                        <CardActions border>
-                                            <Button colored>Details</Button>
-                                        </CardActions>
-                                        <ProgressBar progress={Math.floor((Math.random() * 100))} />
-                                    </Card>
-                                </Cell>
-                                <Cell col={4}>
-                                    <Card shadow={2} style={style.productModule}>
-                                        <CardTitle>
-                                            Product<br />
-                                            Afilliated Person
-                                        </CardTitle>
-                                        <CardText>
-                                            stock/in production
-                                        </CardText>
-                                        <CardActions border>
-                                            <Button colored>Details</Button>
-                                        </CardActions>
-                                        <ProgressBar progress={Math.floor((Math.random() * 100))} />
-                                    </Card>
-                                </Cell>
-                                <Cell col={4}>
-                                    <Card shadow={2} style={style.productModule}>
-                                        <CardTitle>
-                                            Product<br />
-                                            Afilliated Person
-                                        </CardTitle>
-                                        <CardText>
-                                            stock/in production
-                                        </CardText>
-                                        <CardActions border>
-                                            <Button colored>Details</Button>
-                                        </CardActions>
-                                        <ProgressBar progress={Math.floor((Math.random() * 100))} />
-                                    </Card>
-                                </Cell>
-                                <Cell col={4}>
-                                    <Card shadow={2} style={style.productModule}>
-                                        <CardTitle>
-                                            Product<br />
-                                            Afilliated Person
-                                        </CardTitle>
-                                        <CardText>
-                                            stock/in production
-                                        </CardText>
-                                        <CardActions border>
-                                            <Button colored>Details</Button>
-                                        </CardActions>
-                                        <ProgressBar progress={Math.floor((Math.random() * 100))} />
-                                    </Card>
-                                </Cell>
-                                <Cell col={4}>
-                                    <Card shadow={2} style={style.productModule}>
-                                        <CardTitle>
-                                            Product<br />
-                                            Afilliated Person
-                                        </CardTitle>
-                                        <CardText>
-                                            stock/in production
-                                        </CardText>
-                                        <CardActions border>
-                                            <Button colored>Details</Button>
-                                        </CardActions>
-                                        <ProgressBar progress={Math.floor((Math.random() * 100))} />
-                                    </Card>
-                                </Cell>
-                                <Cell col={4}>
-                                    <Card shadow={2} style={style.productModule}>
-                                        <CardTitle>
-                                            Product<br />
-                                            Afilliated Person
-                                        </CardTitle>
-                                        <CardText>
-                                            stock/in production
-                                        </CardText>
-                                        <CardActions border>
-                                            <Button colored>Details</Button>
-                                        </CardActions>
-                                        <ProgressBar progress={Math.floor((Math.random() * 100))} />
-                                    </Card>
-                                </Cell>
-                                <Cell col={4}>
-                                    <Card shadow={2} style={style.productModule}>
-                                        <CardTitle>
-                                            Product<br />
-                                            Afilliated Person
-                                        </CardTitle>
-                                        <CardText>
-                                            stock/in production
-                                        </CardText>
-                                        <CardActions border>
-                                            <Button colored>Details</Button>
-                                        </CardActions>
-                                        <ProgressBar progress={Math.floor((Math.random() * 100))} />
-                                    </Card>
-                                </Cell>
-                                <Cell col={4}>
-                                    <Card shadow={2} style={style.productModule}>
-                                        <CardTitle>
-                                            Product<br />
-                                            Afilliated Person
-                                        </CardTitle>
-                                        <CardText>
-                                            stock/in production
-                                        </CardText>
-                                        <CardActions border>
-                                            <Button colored>Details</Button>
-                                        </CardActions>
-                                        <ProgressBar progress={Math.floor((Math.random() * 100))} />
-                                    </Card>
-                                </Cell>
+                                {this.mapCardView()}
                             </Grid>
                     :
                     <Grid>
-                        <Cell col={12}>
                             <List>
-                                <ListItem style={style.productList}>
-                                    <ListItemContent>Product</ListItemContent>
-                                    <ListItemContent><ProgressBar progress={Math.floor((Math.random() * 100))}/></ListItemContent>
-                                    <ListItemContent>Affiliated Person</ListItemContent>
-                                    <ListItemAction><IconButton name="arrow_forward" /></ListItemAction>
-                                </ListItem>
-                                <ListItem style={style.productList}>
-                                    <ListItemContent>Product</ListItemContent>
-                                    <ListItemContent><ProgressBar progress={Math.floor((Math.random() * 100))}/></ListItemContent>
-                                    <ListItemContent>Affiliated Person</ListItemContent>
-                                    <ListItemAction><IconButton name="arrow_forward" /></ListItemAction>
-                                </ListItem>
-                                <ListItem style={style.productList}>
-                                    <ListItemContent>Product</ListItemContent>
-                                    <ListItemContent><ProgressBar progress={Math.floor((Math.random() * 100))}/></ListItemContent>
-                                    <ListItemContent>Affiliated Person</ListItemContent>
-                                    <ListItemAction><IconButton name="arrow_forward" /></ListItemAction>
-                                </ListItem>
-                                <ListItem style={style.productList}>
-                                    <ListItemContent>Product</ListItemContent>
-                                    <ListItemContent><ProgressBar progress={Math.floor((Math.random() * 100))}/></ListItemContent>
-                                    <ListItemContent>Affiliated Person</ListItemContent>
-                                    <ListItemAction><IconButton name="arrow_forward" /></ListItemAction>
-                                </ListItem>
-                                <ListItem style={style.productList}>
-                                    <ListItemContent>Product</ListItemContent>
-                                    <ListItemContent><ProgressBar progress={Math.floor((Math.random() * 100))}/></ListItemContent>
-                                    <ListItemContent>Affiliated Person</ListItemContent>
-                                    <ListItemAction><IconButton name="arrow_forward" /></ListItemAction>
-                                </ListItem>
-                                <ListItem style={style.productList}>
-                                    <ListItemContent>Product</ListItemContent>
-                                    <ListItemContent><ProgressBar progress={Math.floor((Math.random() * 100))}/></ListItemContent>
-                                    <ListItemContent>Affiliated Person</ListItemContent>
-                                    <ListItemAction><IconButton name="arrow_forward" /></ListItemAction>
-                                </ListItem>
-                                <ListItem style={style.productList}>
-                                    <ListItemContent>Product</ListItemContent>
-                                    <ListItemContent><ProgressBar progress={Math.floor((Math.random() * 100))}/></ListItemContent>
-                                    <ListItemContent>Affiliated Person</ListItemContent>
-                                    <ListItemAction><IconButton name="arrow_forward" /></ListItemAction>
-                                </ListItem>
-                                <ListItem style={style.productList}>
-                                    <ListItemContent>Product</ListItemContent>
-                                    <ListItemContent><ProgressBar progress={Math.floor((Math.random() * 100))}/></ListItemContent>
-                                    <ListItemContent>Affiliated Person</ListItemContent>
-                                    <ListItemAction><IconButton name="arrow_forward" /></ListItemAction>
-                                </ListItem>
-                                <ListItem style={style.productList}>
-                                    <ListItemContent>Product</ListItemContent>
-                                    <ListItemContent><ProgressBar progress={Math.floor((Math.random() * 100))}/></ListItemContent>
-                                    <ListItemContent>Affiliated Person</ListItemContent>
-                                    <ListItemAction><IconButton name="arrow_forward" /></ListItemAction>
-                                </ListItem>
-                                <ListItem style={style.productList}>
-                                    <ListItemContent>Product</ListItemContent>
-                                    <ListItemContent><ProgressBar progress={Math.floor((Math.random() * 100))}/></ListItemContent>
-                                    <ListItemContent>Affiliated Person</ListItemContent>
-                                    <ListItemAction><IconButton name="arrow_forward" /></ListItemAction>
-                                </ListItem>
-                                <ListItem style={style.productList}>
-                                    <ListItemContent>Product</ListItemContent>
-                                    <ListItemContent><ProgressBar progress={Math.floor((Math.random() * 100))}/></ListItemContent>
-                                    <ListItemContent>Affiliated Person</ListItemContent>
-                                    <ListItemAction><IconButton name="arrow_forward" /></ListItemAction>
-                                </ListItem>
-                                <ListItem style={style.productList}>
-                                    <ListItemContent>Product</ListItemContent>
-                                    <ListItemContent><ProgressBar progress={Math.floor((Math.random() * 100))}/></ListItemContent>
-                                    <ListItemContent>Affiliated Person</ListItemContent>
-                                    <ListItemAction><IconButton name="arrow_forward" /></ListItemAction>
-                                </ListItem>
-                                <ListItem style={style.productList}>
-                                    <ListItemContent>Product</ListItemContent>
-                                    <ListItemContent><ProgressBar progress={Math.floor((Math.random() * 100))}/></ListItemContent>
-                                    <ListItemContent>Affiliated Person</ListItemContent>
-                                    <ListItemAction><IconButton name="arrow_forward" /></ListItemAction>
-                                </ListItem>
-                                <ListItem style={style.productList}>
-                                    <ListItemContent>Product</ListItemContent>
-                                    <ListItemContent><ProgressBar progress={Math.floor((Math.random() * 100))}/></ListItemContent>
-                                    <ListItemContent>Affiliated Person</ListItemContent>
-                                    <ListItemAction><IconButton name="arrow_forward" /></ListItemAction>
-                                </ListItem>
-                                <ListItem style={style.productList}>
-                                    <ListItemContent>Product</ListItemContent>
-                                    <ListItemContent><ProgressBar progress={Math.floor((Math.random() * 100))}/></ListItemContent>
-                                    <ListItemContent>Affiliated Person</ListItemContent>
-                                    <ListItemAction><IconButton name="arrow_forward" /></ListItemAction>
-                                </ListItem>
-                                <ListItem style={style.productList}>
-                                    <ListItemContent>Product</ListItemContent>
-                                    <ListItemContent><ProgressBar progress={Math.floor((Math.random() * 100))}/></ListItemContent>
-                                    <ListItemContent>Affiliated Person</ListItemContent>
-                                    <ListItemAction><IconButton name="arrow_forward" /></ListItemAction>
-                                </ListItem>
-                                <ListItem style={style.productList}>
-                                    <ListItemContent>Product</ListItemContent>
-                                    <ListItemContent><ProgressBar progress={Math.floor((Math.random() * 100))}/></ListItemContent>
-                                    <ListItemContent>Affiliated Person</ListItemContent>
-                                    <ListItemAction><IconButton name="arrow_forward" /></ListItemAction>
-                                </ListItem>
-                                <ListItem style={style.productList}>
-                                    <ListItemContent>Product</ListItemContent>
-                                    <ListItemContent><ProgressBar progress={Math.floor((Math.random() * 100))}/></ListItemContent>
-                                    <ListItemContent>Affiliated Person</ListItemContent>
-                                    <ListItemAction><IconButton name="arrow_forward" /></ListItemAction>
-                                </ListItem>
+                                {this.mapListView()}
                             </List>
-                        </Cell>
                     </Grid>
                     }
                 </Cell>
             </div>
         );
     }
-}
+});
+
+export default Dashboard;
