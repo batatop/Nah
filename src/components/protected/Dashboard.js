@@ -10,7 +10,7 @@ var Dashboard = createReactClass({
             view: true,
             products: []
         });
-        base.syncState(`Products`, {
+        base.syncState(`products`, {
             context: this,
             state: 'products',
             asArray: true
@@ -33,7 +33,7 @@ var Dashboard = createReactClass({
                     <Card shadow={2} style={style.productModule}>
                         <CardTitle>
                             {product.name}<br />
-                            {product.afilliatedPerson}
+                            {product.afilliated}
                         </CardTitle>
                         <CardText>
                             {product.amount}
