@@ -10,13 +10,16 @@ var Register = createReactClass({
             registerError: null,
             email: "",
             pw: "",
-            company: ""
+            company: "",
+            name: "",
+            lastName: "",
+            hierarchy: 1
         });
     },
 
     handleSubmit: function(event) {
         event.preventDefault();
-        auth(this.state.email, this.state.pw, this.state.company)
+        auth(this.state.email, this.state.pw, this.state.name, this.state.lastName, this.state.company, this.state.hierarchy)
             .catch((e) => this.setState({registerError: e.message}));
     },
 
@@ -31,6 +34,18 @@ var Register = createReactClass({
                         <Textfield
                             onChange={(company) => this.setState({company: company.target.value})}
                             label="Company"
+                            floatingLabel
+                        />
+                    </Cell>
+                    <Cell col={12}>
+                        <Textfield
+                            onChange={(name) => this.setState({name: name.target.value})}
+                            label="Name"
+                            floatingLabel
+                        />
+                        <Textfield
+                            onChange={(lastName) => this.setState({lastName: lastName.target.value})}
+                            label="Last Name"
                             floatingLabel
                         />
                     </Cell>

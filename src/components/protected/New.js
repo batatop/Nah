@@ -1,17 +1,26 @@
 import React from "react";
 import createReactClass from 'create-react-class';
 import { Grid, Cell, Textfield, Button } from 'react-mdl'
-import { base } from '../../config/constants'
+import { base, firebaseAuth } from '../../config/constants'
 
 var New = createReactClass({
     componentWillMount() {
+        var currentUser = firebaseAuth().currentUser.uid;
         this.setState({
             name: '',
+            company: "",
             afilliated: '',
             amount: '',
             details: '',
             rawMaterial: [],
             progress: 0
+        });
+        base.fetch(`users/${currentUser}`, {
+            context: this,
+            asArray: true,
+            then(user) {
+                this.setState({company: user[0].company});
+            }
         });
     },
 
@@ -19,6 +28,7 @@ var New = createReactClass({
         base.push('products', {
             data: {
                 name: this.state.name,
+                company: this.state.company,
                 afilliated: this.state.afilliated,
                 amount: this.state.amount,
                 details: this.state.details,
