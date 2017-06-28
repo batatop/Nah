@@ -1,25 +1,38 @@
 import React from "react";
 import createReactClass from 'create-react-class';
 import { Grid, Cell, Textfield, Button } from 'react-mdl'
+import { AutoComplete } from "react-mdl-extra";
 import { base, firebaseAuth } from '../../config/constants'
 
 var New = createReactClass({
     componentWillMount() {
         var currentUser = firebaseAuth().currentUser.uid;
         this.setState({
-            name: '',
+            name: "",
             company: "",
-            afilliated: '',
-            amount: '',
-            details: '',
+            afilliated: "",
+            amount: "",
+            details: "",
             rawMaterial: [],
+            staffs: [],
             progress: 0
         });
-        base.fetch(`users/${currentUser}`, {
+        base.fetch(`users/${currentUser}/`, {
             context: this,
             asArray: true,
             then(user) {
-                this.setState({company: user[0].company});
+                base.syncState("users", {
+                    context: this,
+                    asArray: true,
+                    state: "staffs",
+                    queries: {
+                        orderByChild: `info/company`,
+                        equalTo: user[0].company
+                    }
+                });
+                this.setState({
+                    company: user[0].company
+                });
             }
         });
     },
@@ -42,6 +55,18 @@ var New = createReactClass({
         });
     },
 
+    getStaff: function() {
+        var staffList = [];
+        for(var i=0; i<this.state.staffs.length; i++) {
+            var staff = {
+                id: this.state.staffs[i].info.name + " " + this.state.staffs[i].info.lastName,
+                name: this.state.staffs[i].info.name + " " + this.state.staffs[i].info.lastName
+            };
+            staffList.push(staff);
+        }
+        return staffList;
+    },
+
     render() {
         return (
             <Grid>
@@ -56,9 +81,12 @@ var New = createReactClass({
                     />
                 </Cell>
                 <Cell col={12}>
-                    <Textfield
-                        onChange={(afilliated) => this.setState({afilliated: afilliated.target.value})}
+                    <AutoComplete
+                        onChange={(afilliated) => this.setState({afilliated: afilliated})}
                         label="Afilliated Person"
+                        items={this.getStaff()}
+                        valueIndex={'id'}
+                        dataIndex={'name'}
                         floatingLabel
                     />
                 </Cell>
