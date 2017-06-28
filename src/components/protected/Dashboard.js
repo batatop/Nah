@@ -1,23 +1,23 @@
 import React from "react";
-import createReactClass from 'create-react-class';
-import { style } from '../../css/styles.js'
-import { Grid, Cell, Card, CardTitle, CardText, CardActions, Button, ProgressBar, IconButton, List, ListItem, ListItemContent, ListItemAction } from 'react-mdl';
-import { base } from '../../config/constants'
+import createReactClass from "create-react-class";
+import { style } from "../../css/styles.js"
+import { Grid, Cell, Card, CardTitle, CardText, CardActions, Button, ProgressBar, IconButton, List, ListItem, ListItemContent, ListItemAction } from "react-mdl";
+import { base } from "../../config/constants";
 
 var Dashboard = createReactClass({
-    componentWillMount() {
+    componentWillMount: function() {
         this.setState({
             view: true,
             products: []
         });
         base.syncState(`products`, {
             context: this,
-            state: 'products',
+            state: "products",
             asArray: true
         });
     },
 
-    handleViewClick(view) {
+    handleViewClick: function(view) {
         if(view === "module"){
             this.setState({view: true});
         }
@@ -26,10 +26,10 @@ var Dashboard = createReactClass({
         }
     },
 
-    mapCardView() {
+    mapCardView: function() {
         var cardView = this.state.products.map(function(product, i) {
             return (
-                <Cell key={'Card_'+i} col={4}>
+                <Cell key={"Card_"+i} col={4}>
                     <Card shadow={2} style={style.productModule}>
                         <CardTitle>
                             {product.name}<br />
@@ -49,10 +49,10 @@ var Dashboard = createReactClass({
         return cardView;
     },
 
-    mapListView() {
+    mapListView: function() {
         var listView = this.state.products.map(function(product, i) {
             return (
-                <ListItem key={'List_'+i} style={style.productList}>
+                <ListItem key={"List_"+i} style={style.productList}>
                     <ListItemContent>{product.name}</ListItemContent>
                     <ListItemContent><ProgressBar progress={product.progress}/></ListItemContent>
                     <ListItemContent>{product.afilliatedPerson}</ListItemContent>
@@ -63,7 +63,7 @@ var Dashboard = createReactClass({
         return listView;
     },
 
-    render() {
+    render: function() {
         return (
             <div>
                 <Cell col={12}>

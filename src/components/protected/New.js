@@ -1,6 +1,5 @@
 import React from "react";
 import createReactClass from 'create-react-class';
-import { Redirect } from 'react-router-dom'
 import { Grid, Cell, Textfield, Button } from 'react-mdl'
 import { base } from '../../config/constants'
 

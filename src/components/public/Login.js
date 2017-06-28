@@ -1,35 +1,33 @@
-import React, { Component } from 'react'
-import { login, resetPassword } from '../../helpers/auth'
-import { Grid, Cell, Textfield, Button } from 'react-mdl'
-import { style } from '../../css/styles.js'
+import React from "react";
+import createReactClass from "create-react-class";
+import { login, resetPassword } from "../../helpers/auth";
+import { Grid, Cell, Textfield, Button } from "react-mdl";
+import { style } from "../../css/styles.js";
 
-function setErrorMsg(error) {
-    return {
-        loginMessage: error
-    }
-}
+var Login = createReactClass({
+    componentWillMount: function() {
+        this.setState({
+            loginMessage: null,
+            email: "",
+            pw: ""
+        });
+    },
 
-export default class Login extends Component {
-    state = { loginMessage: null }
-    email = {
-        value: ""
-    }
-    pw = {
-        value: ""
-    }
-    handleSubmit = (e) => {
+    handleSubmit: function(e) {
         e.preventDefault()
-        login(this.email.value, this.pw.value)
+        login(this.state.email, this.state.pw)
             .catch((error) => {
-                this.setState(setErrorMsg('Invalid username/password.'))
+                this.setState({loginMessage: "Invalid username/password."})
             })
-    }
-    resetPassword = () => {
-        resetPassword(this.email.value)
-            .then(() => this.setState(setErrorMsg(`Password reset email sent to ${this.email.value}.`)))
-                .catch((error) => this.setState(setErrorMsg(`Email address not found.`)))
-    }
-    render () {
+    },
+
+    resetPassword: function() {
+        resetPassword(this.state.email)
+            .then(() => this.setState({loginMessage: `Password reset email sent to ${this.state.email}.`}))
+                .catch((error) => this.setState({loginMessage: "Email address not found."}))
+    },
+
+    render: function() {
         return (
             <Grid>
                 <Cell col={12}>
@@ -38,15 +36,15 @@ export default class Login extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <Cell col={12}>
                         <Textfield
-                            onChange={(email) => this.email = email.target}
-                            label="E-mail..."
+                            onChange={(email) => this.setState({email: email.target.value})}
+                            label="E-mail"
                             floatingLabel
                         />
                     </Cell>
                     <Cell col={12}>
                         <Textfield
-                            onChange={(pw) => this.pw = pw.target}
-                            label="Password..."
+                            onChange={(pw) => this.setState({pw: pw.target.value})}
+                            label="Password"
                             type="password"
                             floatingLabel
                         />
@@ -65,4 +63,6 @@ export default class Login extends Component {
             </Grid>
         )
     }
-}
+});
+
+export default Login;

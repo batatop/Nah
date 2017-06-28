@@ -1,28 +1,26 @@
-import React, { Component } from 'react'
-import { auth } from '../../helpers/auth'
-import { Grid, Cell, Textfield, Button } from 'react-mdl'
-import { style } from '../../css/styles.js'
+import React from 'react';
+import createReactClass from 'create-react-class';
+import { auth } from '../../helpers/auth';
+import { Grid, Cell, Textfield, Button } from 'react-mdl';
+import { style } from '../../css/styles.js';
 
-function setErrorMsg(error) {
-    return {
-        registerError: error.message
-    }
-}
+var Register = createReactClass({
+    componentWillMount: function() {
+        this.setState({
+            registerError: null,
+            email: "",
+            pw: "",
+            company: ""
+        });
+    },
 
-export default class Register extends Component {
-    state = { registerError: null }
-    email = {
-        value: ""
-    }
-    pw = {
-        value: ""
-    }
-    handleSubmit = (e) => {
-        e.preventDefault()
-        auth(this.email.value, this.pw.value)
-        .catch(e => this.setState(setErrorMsg(e)))
-    }
-    render () {
+    handleSubmit: function(event) {
+        event.preventDefault();
+        auth(this.state.email, this.state.pw, this.state.company)
+            .catch((e) => this.setState({registerError: e.message}));
+    },
+
+    render: function() {
         return (
             <Grid>
                 <Cell col={12}>
@@ -31,15 +29,22 @@ export default class Register extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <Cell col={12}>
                         <Textfield
-                            onChange={(email) => this.email = email.target}
-                            label="E-mail..."
+                            onChange={(company) => this.setState({company: company.target.value})}
+                            label="Company"
                             floatingLabel
                         />
                     </Cell>
                     <Cell col={12}>
                         <Textfield
-                            onChange={(pw) => this.pw = pw.target}
-                            label="Password..."
+                            onChange={(email) => this.setState({email: email.target.value})}
+                            label="E-mail"
+                            floatingLabel
+                        />
+                    </Cell>
+                    <Cell col={12}>
+                        <Textfield
+                            onChange={(pw) => this.setState({pw: pw.target.value})}
+                            label="Password"
                             type="password"
                             floatingLabel
                         />
@@ -58,4 +63,6 @@ export default class Register extends Component {
             </Grid>
         )
     }
-}
+});
+
+export default Register;

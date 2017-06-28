@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component } from "react"
 import { Link } from "react-router-dom";
-import { Cell, List, ListItem, ListItemContent } from 'react-mdl';
-import { logout } from '../helpers/auth';
-import { style } from '../css/styles.js'
+import { Cell, List, ListItem, ListItemContent } from "react-mdl";
+import { logout } from "../helpers/auth";
+import { style } from "../css/styles.js"
 
 export default class Sidebar extends Component  {
     render() {
