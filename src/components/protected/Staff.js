@@ -1,6 +1,6 @@
 import React from "react";
 import createReactClass from "create-react-class";
-import { Cell, List, ListItem, ListItemContent } from "react-mdl";
+import { Grid, Cell, List, ListItem, ListItemContent, Textfield } from "react-mdl";
 import { base, firebaseAuth } from "../../config/constants";
 
 var Staff= createReactClass({
@@ -8,7 +8,8 @@ var Staff= createReactClass({
         var currentUser = firebaseAuth().currentUser.uid;
         this.setState({
             staffs: [],
-            company: ""
+            company: "",
+            hierarchy: ""
         });
         base.fetch(`users/${currentUser}/`, {
             context: this,
@@ -24,7 +25,8 @@ var Staff= createReactClass({
                     }
                 });
                 this.setState({
-                    company: user[0].company
+                    company: user[0].company,
+                    hierarchy: user[0].hierarchy
                 });
             }
         });
@@ -48,11 +50,29 @@ var Staff= createReactClass({
 
     render: function() {
         return (
-            <Cell col={12}>
-                <List>
-                    {this.mapListView()}
-                </List>
-            </Cell>
+            <Grid>
+                <Cell col={12}>
+                    <h1>Staff</h1>
+                </Cell>
+                {
+                    this.state.hierarchy === 1
+                    ?
+                    <Cell col={12}>
+                        <Textfield
+                            onChange={(name) => this.setState({name: name.target.value})}
+                            label="Product Name"
+                            floatingLabel
+                        />
+                    </Cell>
+                    :
+                    <div></div>
+                }
+                <Cell>
+                    <List>
+                        {this.mapListView()}
+                    </List>
+                </Cell>
+            </Grid>
         );
     }
 });

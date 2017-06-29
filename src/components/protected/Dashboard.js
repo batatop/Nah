@@ -80,7 +80,7 @@ var Dashboard = createReactClass({
 
     render: function() {
         return (
-            <div>
+            <Grid>
                 <Cell col={12}>
                     <IconButton name="view_list" onClick={this.handleViewClick.bind(this, "list")} style={style.dashboardViewButtons} />
                     <IconButton name="view_module" onClick={this.handleViewClick.bind(this, "module")} style={style.dashboardViewButtons} />
@@ -88,18 +88,18 @@ var Dashboard = createReactClass({
                 <Cell col={12}>
                     {this.state.view
                         ?
-                            <Grid>
-                                {this.mapCardView()}
-                            </Grid>
-                    :
-                    <Grid>
+                        <Grid>
+                            {this.mapCardView()}
+                        </Grid>
+                        :
+                        <Grid>
                             <List>
                                 {this.mapListView()}
                             </List>
-                    </Grid>
+                        </Grid>
                     }
                 </Cell>
-            </div>
+            </Grid>
         );
     }
 });

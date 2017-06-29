@@ -68,7 +68,6 @@ var New = createReactClass({
     },
 
     render: function() {
-        console.log(this.state.afilliated);
         return (
             <Grid>
                 <Cell col={12}>
@@ -87,8 +86,8 @@ var New = createReactClass({
                         onChange={(afilliated) => this.setState({afilliated: afilliated})}
                         label="Afilliated Person"
                         items={this.getStaff()}
-                        valueIndex={'id'}
-                        dataIndex={'name'}
+                        valueIndex={"id"}
+                        dataIndex={"name"}
                         floatingLabel
                     />
                 </Cell>
