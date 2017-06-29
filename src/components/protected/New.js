@@ -67,7 +67,8 @@ var New = createReactClass({
         return staffList;
     },
 
-    render() {
+    render: function() {
+        console.log(this.state.afilliated);
         return (
             <Grid>
                 <Cell col={12}>
@@ -82,6 +83,7 @@ var New = createReactClass({
                 </Cell>
                 <Cell col={12}>
                     <AutoComplete
+                        value={this.state.afilliated}
                         onChange={(afilliated) => this.setState({afilliated: afilliated})}
                         label="Afilliated Person"
                         items={this.getStaff()}
