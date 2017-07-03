@@ -16,6 +16,7 @@ import Inventory from "./protected/Inventory";
 import Orders from "./protected/Orders";
 import Suppliers from "./protected/Suppliers";
 import Staff from "./protected/Staff";
+import Product from "./protected/Product";
 import Login from "./public/Login";
 import Register from "./public/Register";
 
@@ -104,6 +105,7 @@ var App = createReactClass({
                                     <PrivateRoute authed={this.state.authed} path="/orders" component={Orders} />
                                     <PrivateRoute authed={this.state.authed} path="/suppliers" component={Suppliers} />
                                     <PrivateRoute authed={this.state.authed} path="/staff" component={Staff} />
+                                    <PrivateRoute authed={this.state.authed} path="/product/:productId" component={Product} />
                                     <Route render={() => <h3>No Match</h3>} />
                                 </Switch>
                             </Cell>

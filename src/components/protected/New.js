@@ -40,12 +40,14 @@ var New = createReactClass({
     handleAddProduct() {
         base.push('products', {
             data: {
-                name: this.state.name,
-                company: this.state.company,
-                afilliated: this.state.afilliated,
-                amount: this.state.amount,
-                details: this.state.details,
-                rawMaterial: this.state.rawMaterial
+                info: {
+                    name: this.state.name,
+                    company: this.state.company,
+                    afilliated: this.state.afilliated,
+                    amount: this.state.amount,
+                    details: this.state.details,
+                    rawMaterial: this.state.rawMaterial
+                }
             },
             then(err){
                 if(!err){

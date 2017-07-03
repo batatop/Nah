@@ -1,5 +1,6 @@
 import React from "react";
 import createReactClass from "create-react-class";
+import { Link } from "react-router-dom";
 import { style } from "../../css/styles.js"
 import { Grid, Cell, Card, CardTitle, CardText, CardActions, Button, ProgressBar, IconButton, List, ListItem, ListItemContent, ListItemAction } from "react-mdl";
 import { base, firebaseAuth } from "../../config/constants";
@@ -21,7 +22,7 @@ var Dashboard = createReactClass({
                     state: "products",
                     asArray: true,
                     queries: {
-                        orderByChild: `company`,
+                        orderByChild: `info/company`,
                         equalTo: user[0].company
                     }
                 });
@@ -47,16 +48,16 @@ var Dashboard = createReactClass({
                 <Cell key={"ProductCard_"+i} col={4}>
                     <Card shadow={2} style={style.productModule}>
                         <CardTitle>
-                            {product.name}<br />
-                            {product.afilliated}
+                            {product.info.name}<br />
+                            {product.info.afilliated}
                         </CardTitle>
                         <CardText>
-                            {product.amount}
+                            {product.info.amount}
                         </CardText>
                         <CardActions border>
-                            <Button colored>Details</Button>
+                            <Link to={"/product/"+product.key}>Inventory</Link>
                         </CardActions>
-                        <ProgressBar progress={product.progress} />
+                        <ProgressBar progress={product.info.progress} />
                     </Card>
                 </Cell>
             );
