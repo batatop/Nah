@@ -1,6 +1,6 @@
 import React from 'react';
 import createReactClass from 'create-react-class';
-import { saveUser } from '../../helpers/auth';
+import { auth } from '../../helpers/auth';
 import { Grid, Cell, Textfield, Button } from 'react-mdl';
 import { style } from '../../css/styles.js';
 
@@ -19,7 +19,7 @@ var Register = createReactClass({
 
     handleSubmit: function(event) {
         event.preventDefault();
-        saveUser(this.state.email, this.state.pw, this.state.name, this.state.lastName, this.state.company, this.state.hierarchy)
+        auth(this.state.email, this.state.pw, this.state.name, this.state.lastName, this.state.company, this.state.hierarchy)
             .catch((e) => this.setState({registerError: e.message}));
     },
 
