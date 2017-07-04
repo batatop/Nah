@@ -7,16 +7,16 @@ import "react-mdl/extra/material.css";
 import "react-mdl/extra/material.js";
 import { style } from "../css/styles.js";
 
+// layout
 import Sidebar from "./sidebar";
+// protected
 import Dashboard from "./protected/Dashboard";
-import Products from "./protected/Products";
 import New from "./protected/New";
-import Schedule from "./protected/Schedule";
-import Inventory from "./protected/Inventory";
-import Orders from "./protected/Orders";
-import Suppliers from "./protected/Suppliers";
-import Staff from "./protected/Staff";
 import Product from "./protected/Product";
+import RawMaterials from "./protected/RawMaterials";
+import Schedule from "./protected/Schedule";
+import Staff from "./protected/Staff";
+// public
 import Login from "./public/Login";
 import Register from "./public/Register";
 
@@ -98,14 +98,11 @@ var App = createReactClass({
                                     <PublicRoute authed={this.state.authed} path="/login" component={Login} />
                                     <PublicRoute authed={this.state.authed} path="/register" component={Register} />
                                     <PrivateRoute authed={this.state.authed} path="/dashboard" component={Dashboard} />
-                                    <PrivateRoute authed={this.state.authed} path="/products" component={Products} />
                                     <PrivateRoute authed={this.state.authed} path="/new" component={New} />
-                                    <PrivateRoute authed={this.state.authed} path="/schedule" component={Schedule} />
-                                    <PrivateRoute authed={this.state.authed} path="/inventory" component={Inventory} />
-                                    <PrivateRoute authed={this.state.authed} path="/orders" component={Orders} />
-                                    <PrivateRoute authed={this.state.authed} path="/suppliers" component={Suppliers} />
-                                    <PrivateRoute authed={this.state.authed} path="/staff" component={Staff} />
                                     <PrivateRoute authed={this.state.authed} path="/product/:productId" component={Product} />
+                                    <PrivateRoute authed={this.state.authed} path="/rawMaterials" component={RawMaterials} />
+                                    <PrivateRoute authed={this.state.authed} path="/schedule" component={Schedule} />
+                                    <PrivateRoute authed={this.state.authed} path="/staff" component={Staff} />
                                     <Route render={() => <h3>No Match</h3>} />
                                 </Switch>
                             </Cell>

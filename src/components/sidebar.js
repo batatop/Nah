@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Cell, List, ListItem, ListItemContent } from "react-mdl";
 import { logout } from "../helpers/auth";
 import { style } from "../css/styles.js"
@@ -19,42 +19,57 @@ export default class Sidebar extends Component  {
                         <span>
                             <ListItem>
                                 <ListItemContent>
-                                    <Link to="/dashboard" style={style.sidebarLink}>Dashboard</Link>
+                                    <NavLink
+                                        to="/dashboard"
+                                        style={style.sidebarLink}
+                                        activeStyle={style.sidebarLinkActive}
+                                    >
+                                    Dashboard
+                                    </NavLink>
                                 </ListItemContent>
                             </ListItem>
                             <ListItem>
                                 <ListItemContent>
-                                    <Link to="/products" style={style.sidebarLink}>Products</Link>
+                                    <NavLink
+                                        to="/new"
+                                        style={style.sidebarLink}
+                                        activeStyle={style.sidebarLinkActive}
+                                    >
+                                    New
+                                    </NavLink>
                                 </ListItemContent>
                             </ListItem>
                             <ListItem>
                                 <ListItemContent>
-                                    <Link to="/new" style={style.sidebarLink}>New</Link>
+                                    <NavLink
+                                        to="/schedule"
+                                        style={style.sidebarLink}
+                                        activeStyle={style.sidebarLinkActive}
+                                    >
+                                    Schedule
+                                    </NavLink>
                                 </ListItemContent>
                             </ListItem>
                             <ListItem>
                                 <ListItemContent>
-                                    <Link to="/schedule" style={style.sidebarLink}>Schedule</Link>
+                                    <NavLink
+                                        to="/rawMaterials"
+                                        style={style.sidebarLink}
+                                        activeStyle={style.sidebarLinkActive}
+                                    >
+                                    Raw Materials
+                                    </NavLink>
                                 </ListItemContent>
                             </ListItem>
                             <ListItem>
                                 <ListItemContent>
-                                    <Link to="/inventory" style={style.sidebarLink}>Inventory</Link>
-                                </ListItemContent>
-                            </ListItem>
-                            <ListItem>
-                                <ListItemContent>
-                                    <Link to="/orders" style={style.sidebarLink}>Orders</Link>
-                                </ListItemContent>
-                            </ListItem>
-                            <ListItem>
-                                <ListItemContent>
-                                    <Link to="/suppliers" style={style.sidebarLink}>Suppliers</Link>
-                                </ListItemContent>
-                            </ListItem>
-                            <ListItem>
-                                <ListItemContent>
-                                    <Link to="/staff" style={style.sidebarLink}>Staff</Link>
+                                    <NavLink
+                                        to="/staff"
+                                        style={style.sidebarLink}
+                                        activeStyle={style.sidebarLinkActive}
+                                    >
+                                    Staff
+                                    </NavLink>
                                 </ListItemContent>
                             </ListItem>
                             <ListItem>

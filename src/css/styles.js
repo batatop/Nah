@@ -49,6 +49,13 @@ export const style = {
         border: "none"
     },
 
+    sidebarLinkActive: {
+        color: "#212121",
+        fontWeight: "bold",
+        textDecoration: "none",
+        border: "none"
+    },
+
     productModule: {
         width: "100%"
     },
