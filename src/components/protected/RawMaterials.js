@@ -11,7 +11,8 @@ var RawMaterials = createReactClass({
             name: "",
             company: "",
             inStock: "",
-            unit: ""
+            unit: "",
+            hierarchy: ""
         });
         base.fetch(`users/${currentUser}/`, {
             context: this,
@@ -27,7 +28,8 @@ var RawMaterials = createReactClass({
                     }
                 });
                 this.setState({
-                    company: user[0].company
+                    company: user[0].company,
+                    hierarchy: user[0].hierarchy
                 });
             }
         });
@@ -79,30 +81,38 @@ var RawMaterials = createReactClass({
                 <Cell col={12}>
                     <h1>Raw Materials</h1>
                 </Cell>
-                <Cell col={12}>
-                    <Textfield
-                        onChange={(name) => this.setState({name: name.target.value})}
-                        label="Raw Material Name"
-                        floatingLabel
-                    />
-                </Cell>
-                <Cell col={12}>
-                    <Textfield
-                        onChange={(inStock) => this.setState({inStock: inStock.target.value})}
-                        label="In Stock"
-                        pattern="-?[0-9]*(\.[0-9]+)?"
-                        error="Input has to be a number."
-                        floatingLabel
-                    />
-                    <Textfield
-                        onChange={(unit) => this.setState({unit: unit.target.value})}
-                        label="Unit"
-                        floatingLabel
-                    />
-                </Cell>
-                <Cell col={12}>
-                    <Button onClick={this.handleAddRawMaterial} raised ripple>Add Raw Material</Button>
-                </Cell>
+                {
+                    this.state.hierarchy === 1
+                    ?
+                    <div>
+                        <Cell col={12}>
+                            <Textfield
+                                onChange={(name) => this.setState({name: name.target.value})}
+                                label="Raw Material Name"
+                                floatingLabel
+                            />
+                        </Cell>
+                        <Cell col={12}>
+                            <Textfield
+                                onChange={(inStock) => this.setState({inStock: inStock.target.value})}
+                                label="In Stock"
+                                pattern="-?[0-9]*(\.[0-9]+)?"
+                                error="Input has to be a number."
+                                floatingLabel
+                            />
+                            <Textfield
+                                onChange={(unit) => this.setState({unit: unit.target.value})}
+                                label="Unit"
+                                floatingLabel
+                            />
+                        </Cell>
+                        <Cell col={12}>
+                            <Button onClick={this.handleAddRawMaterial} raised ripple>Add Raw Material</Button>
+                        </Cell>
+                    </div>
+                    :
+                    <div></div>
+                }
                 <Cell col={12}>
                     <h4>Raw Materials</h4>
                     <DataTable
