@@ -68,5 +68,9 @@ export const style = {
 
     dashboardViewButtons: {
         float: "right"
+    },
+
+    deneme: {
+            height: "10px"
     }
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import createReactClass from 'create-react-class';
-import { Grid, Cell, Textfield, Button } from 'react-mdl'
+import { Grid, Cell, Textfield, Button, FABButton, Icon, DataTable, TableHeader } from 'react-mdl'
 import { AutoComplete } from "react-mdl-extra";
 import { base, firebaseAuth } from '../../config/constants'
 
@@ -13,8 +13,12 @@ var New = createReactClass({
             afilliated: "",
             amount: "",
             details: "",
-            rawMaterial: [],
+            productRawMaterialName: "",
+            productRawMaterialAmount: 0,
+            productRawMaterialUnit: "",
+            productRawMaterials: [],
             staffs: [],
+            rawMaterials: [],
             progress: 0
         });
         base.fetch(`users/${currentUser}/`, {
@@ -25,6 +29,15 @@ var New = createReactClass({
                     context: this,
                     asArray: true,
                     state: "staffs",
+                    queries: {
+                        orderByChild: `info/company`,
+                        equalTo: user[0].company
+                    }
+                });
+                base.syncState("rawMaterials", {
+                    context: this,
+                    asArray: true,
+                    state: "rawMaterials",
                     queries: {
                         orderByChild: `info/company`,
                         equalTo: user[0].company
@@ -46,7 +59,7 @@ var New = createReactClass({
                     afilliated: this.state.afilliated,
                     amount: this.state.amount,
                     details: this.state.details,
-                    rawMaterial: this.state.rawMaterial
+                    productRawMaterial: this.state.productRawMaterial
                 }
             },
             then(err){
@@ -55,6 +68,30 @@ var New = createReactClass({
                 }
             }
         });
+    },
+
+    handleAddMaterial: function() {
+        var valid = true;
+        var rawMaterialState = this.state.productRawMaterials;
+        var rawMaterial = {
+            name: "",
+            amount: "",
+            unit: ""
+        };
+
+        if(this.state.productRawMaterialUnit === "") {
+            valid = false;
+        }
+        if(this.state.productRawMaterialAmount === 0) {
+            valid = false;
+        }
+        if(valid) {
+            rawMaterial.name = this.state.productRawMaterialName;
+            rawMaterial.amount = this.state.productRawMaterialAmount;
+            rawMaterial.unit = this.state.productRawMaterialUnit;
+            rawMaterialState.push(rawMaterial);
+            this.setState({productRawMaterials: rawMaterialState});
+        }
     },
 
     getStaff: function() {
@@ -67,6 +104,51 @@ var New = createReactClass({
             staffList.push(staff);
         }
         return staffList;
+    },
+
+    getRawMaterial: function() {
+        var rawMaterialList = [];
+        for(var i=0; i<this.state.rawMaterials.length; i++) {
+            var rawMaterial = {
+                id: this.state.rawMaterials[i].info.name,
+                name: this.state.rawMaterials[i].info.name
+            };
+            rawMaterialList.push(rawMaterial);
+        }
+        return rawMaterialList;
+    },
+
+    setRawMaterialUnit: function(productRawMaterialName) {
+        base.fetch('rawMaterials', {
+            context: this,
+            asArray: true,
+            queries: {
+                orderByChild: "info/name",
+                equalTo: productRawMaterialName
+            },
+            then(data){
+                if(data[0]) {
+                    this.setState({productRawMaterialUnit: data[0].info.unit});
+                }
+                else {
+                    this.setState({productRawMaterialUnit: ""});
+                }
+            }
+        });
+    },
+
+    mapRawMaterial: function() {
+        var rawMaterialArray = [];
+        for(var i=0; i<this.state.productRawMaterials.length; i++){
+            var rawMaterial = {
+                no: (i+1),
+                name: this.state.productRawMaterials[i].name,
+                needed: this.state.productRawMaterials[i].amount
+            }
+            rawMaterialArray.push(rawMaterial);
+        }
+
+        return rawMaterialArray;
     },
 
     render: function() {
@@ -109,25 +191,57 @@ var New = createReactClass({
                         floatingLabel
                     />
                 </Cell>
-                <Cell col={12}>
-                    <Textfield
-                        onChange={(rawMaterial) => {
-                            var rawMaterialObjects = [];
-                            var rawMaterialArray = rawMaterial.target.value.split('\n');
-                            for(var i=0; i<rawMaterialArray.length; i++){
-                                var singleRawMaterial = rawMaterialArray[i].split(' ');
-                                var singleRawMaterialObject = {
-                                    name: singleRawMaterial[0],
-                                    amount: singleRawMaterial[1]
-                                }
-                                rawMaterialObjects.push(singleRawMaterialObject);
-                            }
-                            this.setState({rawMaterial: rawMaterialObjects});
+                <Cell col={5}>
+                    <AutoComplete
+                        value={this.state.productRawMaterialName}
+                        onChange={(productRawMaterialName) => {
+                            this.setRawMaterialUnit(productRawMaterialName);
+                            this.setState({productRawMaterialName: productRawMaterialName});
                         }}
                         label="Raw Materials"
-                        rows={3}
+                        items={this.getRawMaterial()}
+                        valueIndex={"id"}
+                        dataIndex={"name"}
                         floatingLabel
                     />
+                </Cell>
+                <Cell col={5}>
+                    <Textfield
+                        onChange={(productRawMaterialAmount) => this.setState({productRawMaterialAmount: productRawMaterialAmount.target.value})}
+                        label="Needed"
+                        pattern="-?[0-9]*(\.[0-9]+)?"
+                        error="Input has to be a number."
+                        floatingLabel
+                    />
+                </Cell>
+                <Cell col={1}>
+                    <h5>{this.state.productRawMaterialUnit}</h5>
+                </Cell>
+                <Cell col={1}>
+                    <FABButton
+                        onClick={this.handleAddMaterial}
+                        ripple
+                    >
+                        <Icon name="add" />
+                    </FABButton>
+                </Cell>
+                <Cell col={12}>
+                    {
+                        this.state.productRawMaterials.length !== 0
+                        ?
+                        <div>
+                            <DataTable
+                                shadow={2}
+                                rows={this.mapRawMaterial()}
+                            >
+                                <TableHeader name="no" tooltip="Row number.">No.</TableHeader>
+                                <TableHeader name="name" tooltip="Raw material name.">Name</TableHeader>
+                                <TableHeader name="needed" tooltip="Needed amount of the raw material.">Needed</TableHeader>
+                            </DataTable>
+                        </div>
+                        :
+                        <div></div>
+                    }
                 </Cell>
                 <Cell col={12}>
                     <Button onClick={this.handleAddProduct} raised ripple>Add Product</Button>
@@ -138,3 +252,24 @@ var New = createReactClass({
 });
 
 export default New;
+
+/*
+<Textfield
+    onChange={(rawMaterial) => {
+        var rawMaterialObjects = [];
+        var rawMaterialArray = rawMaterial.target.value.split('\n');
+        for(var i=0; i<rawMaterialArray.length; i++){
+            var singleRawMaterial = rawMaterialArray[i].split(' ');
+            var singleRawMaterialObject = {
+                name: singleRawMaterial[0],
+                amount: singleRawMaterial[1]
+            }
+            rawMaterialObjects.push(singleRawMaterialObject);
+        }
+        this.setState({rawMaterial: rawMaterialObjects});
+    }
+    label="Raw Materials"
+    rows={3}
+    floatingLabel
+/>
+*/
