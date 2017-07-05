@@ -59,7 +59,7 @@ var New = createReactClass({
                     afilliated: this.state.afilliated,
                     amount: this.state.amount,
                     details: this.state.details,
-                    productRawMaterial: this.state.productRawMaterial
+                    rawMaterial: this.state.productRawMaterials
                 }
             },
             then(err){
