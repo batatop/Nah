@@ -55,7 +55,7 @@ var Dashboard = createReactClass({
                             {product.info.amount}
                         </CardText>
                         <CardActions border>
-                            <Link to={"/product/"+product.key}>Inventory</Link>
+                            <Link to={"/product/"+product.key}>Details</Link>
                         </CardActions>
                         <ProgressBar progress={product.info.progress} />
                     </Card>
