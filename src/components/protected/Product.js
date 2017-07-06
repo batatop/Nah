@@ -27,7 +27,6 @@ var Product = createReactClass({
         var rawMaterialArray = [];
 
         for(var i=0; i<this.state.product[0].rawMaterial.length; i++){
-            console.log(this.state.product[0].rawMaterial[i]);
             var rawMaterial = {
                 no: (i+1),
                 name: this.state.product[0].rawMaterial[i].name,
@@ -40,7 +39,6 @@ var Product = createReactClass({
     },
 
     render: function() {
-        console.log(this.state.product[0]);
         return(
             <Grid>
                 <Cell col={12}>

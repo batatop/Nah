@@ -58,7 +58,6 @@ var Staff= createReactClass({
     },
 
     render: function() {
-        console.log(this.state.company);
         return (
             <Grid>
                 <Cell col={12}>

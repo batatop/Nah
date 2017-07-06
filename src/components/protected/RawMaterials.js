@@ -62,7 +62,6 @@ var RawMaterials = createReactClass({
         var rawMaterialArray = [];
 
         for(var i=0; i<this.state.rawMaterials.length; i++){
-            console.log(this.state.rawMaterials[i]);
             var rawMaterial = {
                 no: (i+1),
                 name: this.state.rawMaterials[i].info.name,
@@ -75,7 +74,6 @@ var RawMaterials = createReactClass({
     },
 
     render() {
-        console.log(this.state.rawMaterials);
         return (
             <Grid>
                 <Cell col={12}>
