@@ -103,6 +103,7 @@ var App = createReactClass({
                                     <PrivateRoute authed={this.state.authed} path="/rawMaterials" component={RawMaterials} />
                                     <PrivateRoute authed={this.state.authed} path="/schedule" component={Schedule} />
                                     <PrivateRoute authed={this.state.authed} path="/staff" component={Staff} />
+                                    <Redirect from="/" to="/dashboard"/>
                                     <Route render={() => <h3>No Match</h3>} />
                                 </Switch>
                             </Cell>
