@@ -14,15 +14,7 @@ export const style = {
     loadingApp: {
         position: "absolute",
         top: "30%",
-        left: "30%",
-        margin: 'auto',
-        textAlign: "center"
-    },
-
-    loadingPage: {
-        position: "absolute",
-        top: "35%",
-        left: "55%",
+        left: "35%",
         margin: 'auto',
         textAlign: "center"
     },

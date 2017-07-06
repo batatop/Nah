@@ -8,7 +8,6 @@ var AddProduct = createReactClass({
     componentWillMount: function() {
         var currentUser = firebaseAuth().currentUser.uid;
         this.setState({
-            loading: true,
             name: "",
             company: "",
             afilliated: "",
