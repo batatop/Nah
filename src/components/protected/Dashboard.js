@@ -69,9 +69,9 @@ var Dashboard = createReactClass({
         var listView = this.state.products.map(function(product, i) {
             return (
                 <ListItem key={"ProductList_"+i} style={style.productList}>
-                    <ListItemContent>{product.name}</ListItemContent>
-                    <ListItemContent><ProgressBar progress={product.progress}/></ListItemContent>
-                    <ListItemContent>{product.afilliatedPerson}</ListItemContent>
+                    <ListItemContent>{product.info.name}</ListItemContent>
+                    <ListItemContent><ProgressBar progress={product.info.progress}/></ListItemContent>
+                    <ListItemContent>{product.info.afilliated}</ListItemContent>
                     <ListItemAction><IconButton name="arrow_forward" /></ListItemAction>
                 </ListItem>
             );
