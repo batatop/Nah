@@ -72,7 +72,9 @@ var Dashboard = createReactClass({
                     <ListItemContent>{product.info.name}</ListItemContent>
                     <ListItemContent><ProgressBar progress={product.info.progress}/></ListItemContent>
                     <ListItemContent>{product.info.afilliated}</ListItemContent>
-                    <ListItemAction><IconButton name="arrow_forward" /></ListItemAction>
+                    <ListItemAction>
+                    <Link to={"/product/"+product.key}><IconButton name="arrow_forward" /></Link>
+                    </ListItemAction>
                 </ListItem>
             );
         });
