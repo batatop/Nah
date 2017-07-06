@@ -11,11 +11,18 @@ export const style = {
         margin: 'auto',
     },
 
-    loading: {
+    loadingApp: {
         position: "absolute",
-        width: '80%',
         top: "30%",
-        left: "10%",
+        left: "30%",
+        margin: 'auto',
+        textAlign: "center"
+    },
+
+    loadingPage: {
+        position: "absolute",
+        top: "35%",
+        left: "55%",
         margin: 'auto',
         textAlign: "center"
     },

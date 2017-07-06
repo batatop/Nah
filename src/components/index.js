@@ -2,7 +2,7 @@ import React from "react";
 import createReactClass from 'create-react-class';
 import { Route, BrowserRouter, Redirect, Switch } from "react-router-dom";
 import { firebaseAuth } from "../config/constants";
-import { Grid, Cell, Spinner } from "react-mdl";
+import { Grid, Cell, ProgressBar } from "react-mdl";
 import "react-mdl/extra/material.css";
 import "react-mdl/extra/material.js";
 import { style } from "../css/styles.js";
@@ -75,10 +75,11 @@ var App = createReactClass({
         return this.state.loading === true
             ?
             (
-                <div style={style.loading}>
+                <div style={style.loadingApp}>
                     <Grid>
                         <Cell col={12}>
-                            <Spinner style={style.spinner} singleColor />
+                            <h3>Loading</h3>
+                            <ProgressBar indeterminate />
                         </Cell>
                     </Grid>
                 </div>

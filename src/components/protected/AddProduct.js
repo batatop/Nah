@@ -5,9 +5,10 @@ import { AutoComplete } from "react-mdl-extra";
 import { base, firebaseAuth } from '../../config/constants'
 
 var AddProduct = createReactClass({
-    componentWillMount() {
+    componentWillMount: function() {
         var currentUser = firebaseAuth().currentUser.uid;
         this.setState({
+            loading: true,
             name: "",
             company: "",
             afilliated: "",
@@ -106,7 +107,7 @@ var AddProduct = createReactClass({
         }
     },
 
-    handleTimeoutSnackbar() {
+    handleTimeoutSnackbar: function() {
         this.setState({ isSnackbarActive: false });
     },
 
