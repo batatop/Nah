@@ -159,7 +159,7 @@ var AddProduct = createReactClass({
             var rawMaterial = {
                 no: (i+1),
                 name: this.state.productRawMaterials[i].name,
-                needed: this.state.productRawMaterials[i].amount
+                needed: this.state.productRawMaterials[i].amount+" "+this.state.productRawMaterials[i].unit
             }
             rawMaterialArray.push(rawMaterial);
         }

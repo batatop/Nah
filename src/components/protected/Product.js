@@ -30,7 +30,7 @@ var Product = createReactClass({
             var rawMaterial = {
                 no: (i+1),
                 name: this.state.product[0].rawMaterial[i].name,
-                amount: this.state.product[0].rawMaterial[i].amount
+                amount: this.state.product[0].rawMaterial[i].amount+" "+this.state.product[0].rawMaterial[i].unit
             }
             rawMaterialArray.push(rawMaterial);
         }

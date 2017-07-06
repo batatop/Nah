@@ -41,6 +41,7 @@ var RawMaterials = createReactClass({
     },
 
     handleAddRawMaterial: function() {
+        var self = this;
         base.push('rawMaterials', {
             data: {
                 info: {
@@ -52,7 +53,11 @@ var RawMaterials = createReactClass({
             },
             then(err){
                 if(!err){
-                    console.log('added');
+                    self.setState({
+                        name: "",
+                        inStock: "",
+                        unit: ""
+                    });
                 }
             }
         });
@@ -85,6 +90,7 @@ var RawMaterials = createReactClass({
                     <div>
                         <Cell col={12}>
                             <Textfield
+                                value={this.state.name}
                                 onChange={(name) => this.setState({name: name.target.value})}
                                 label="Raw Material Name"
                                 floatingLabel
@@ -92,6 +98,7 @@ var RawMaterials = createReactClass({
                         </Cell>
                         <Cell col={12}>
                             <Textfield
+                                value={this.state.inStock}
                                 onChange={(inStock) => this.setState({inStock: inStock.target.value})}
                                 label="In Stock"
                                 pattern="-?[0-9]*(\.[0-9]+)?"
@@ -99,6 +106,7 @@ var RawMaterials = createReactClass({
                                 floatingLabel
                             />
                             <Textfield
+                                value={this.state.unit}
                                 onChange={(unit) => this.setState({unit: unit.target.value})}
                                 label="Unit"
                                 floatingLabel
