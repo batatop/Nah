@@ -11,7 +11,7 @@ import { style } from "../css/styles.js";
 import Sidebar from "./sidebar";
 // protected
 import Dashboard from "./protected/Dashboard";
-import New from "./protected/New";
+import AddProduct from "./protected/AddProduct";
 import Product from "./protected/Product";
 import RawMaterials from "./protected/RawMaterials";
 import Schedule from "./protected/Schedule";
@@ -98,7 +98,7 @@ var App = createReactClass({
                                     <PublicRoute authed={this.state.authed} path="/login" component={Login} />
                                     <PublicRoute authed={this.state.authed} path="/register" component={Register} />
                                     <PrivateRoute authed={this.state.authed} path="/dashboard" component={Dashboard} />
-                                    <PrivateRoute authed={this.state.authed} path="/new" component={New} />
+                                    <PrivateRoute authed={this.state.authed} path="/addProduct" component={AddProduct} />
                                     <PrivateRoute authed={this.state.authed} path="/product/:productId" component={Product} />
                                     <PrivateRoute authed={this.state.authed} path="/rawMaterials" component={RawMaterials} />
                                     <PrivateRoute authed={this.state.authed} path="/schedule" component={Schedule} />

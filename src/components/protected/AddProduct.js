@@ -4,7 +4,7 @@ import { Grid, Cell, Textfield, Button, FABButton, Icon, DataTable, TableHeader 
 import { AutoComplete } from "react-mdl-extra";
 import { base, firebaseAuth } from '../../config/constants'
 
-var New = createReactClass({
+var AddProduct = createReactClass({
     componentWillMount() {
         var currentUser = firebaseAuth().currentUser.uid;
         this.setState({
@@ -155,7 +155,7 @@ var New = createReactClass({
         return (
             <Grid>
                 <Cell col={12}>
-                    <h1>New</h1>
+                    <h1>Add Product</h1>
                 </Cell>
                 <Cell col={12}>
                     <Textfield
@@ -251,25 +251,4 @@ var New = createReactClass({
     }
 });
 
-export default New;
-
-/*
-<Textfield
-    onChange={(rawMaterial) => {
-        var rawMaterialObjects = [];
-        var rawMaterialArray = rawMaterial.target.value.split('\n');
-        for(var i=0; i<rawMaterialArray.length; i++){
-            var singleRawMaterial = rawMaterialArray[i].split(' ');
-            var singleRawMaterialObject = {
-                name: singleRawMaterial[0],
-                amount: singleRawMaterial[1]
-            }
-            rawMaterialObjects.push(singleRawMaterialObject);
-        }
-        this.setState({rawMaterial: rawMaterialObjects});
-    }
-    label="Raw Materials"
-    rows={3}
-    floatingLabel
-/>
-*/
+export default AddProduct;

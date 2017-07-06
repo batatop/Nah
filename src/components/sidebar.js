@@ -31,11 +31,11 @@ export default class Sidebar extends Component  {
                             <ListItem>
                                 <ListItemContent>
                                     <NavLink
-                                        to="/new"
+                                        to="/addProduct"
                                         style={style.sidebarLink}
                                         activeStyle={style.sidebarLinkActive}
                                     >
-                                    New
+                                    Add Product
                                     </NavLink>
                                 </ListItemContent>
                             </ListItem>
