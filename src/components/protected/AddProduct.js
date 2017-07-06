@@ -102,7 +102,12 @@ var AddProduct = createReactClass({
             rawMaterial.amount = this.state.productRawMaterialAmount;
             rawMaterial.unit = this.state.productRawMaterialUnit;
             rawMaterialState.push(rawMaterial);
-            this.setState({productRawMaterials: rawMaterialState});
+            this.setState({
+                productRawMaterials: rawMaterialState,
+                productRawMaterialName: "",
+                productRawMaterialAmount: "",
+                productRawMaterialUnit: ""
+            });
         }
     },
 
@@ -159,7 +164,7 @@ var AddProduct = createReactClass({
             var rawMaterial = {
                 no: (i+1),
                 name: this.state.productRawMaterials[i].name,
-                needed: this.state.productRawMaterials[i].amount+" "+this.state.productRawMaterials[i].unit
+                amount: this.state.productRawMaterials[i].amount+" "+this.state.productRawMaterials[i].unit
             }
             rawMaterialArray.push(rawMaterial);
         }
@@ -229,7 +234,7 @@ var AddProduct = createReactClass({
                         <Textfield
                             value={this.state.productRawMaterialAmount}
                             onChange={(productRawMaterialAmount) => this.setState({productRawMaterialAmount: productRawMaterialAmount.target.value})}
-                            label="Needed"
+                            label="Amount"
                             pattern="-?[0-9]*(\.[0-9]+)?"
                             error="Input has to be a number."
                             floatingLabel
@@ -257,7 +262,7 @@ var AddProduct = createReactClass({
                                 >
                                     <TableHeader name="no" tooltip="Row number.">No.</TableHeader>
                                     <TableHeader name="name" tooltip="Raw material name.">Name</TableHeader>
-                                    <TableHeader name="needed" tooltip="Needed amount of the raw material.">Needed</TableHeader>
+                                    <TableHeader name="amount" tooltip="Needed amount of the raw material.">Amount</TableHeader>
                                 </DataTable>
                             </div>
                             :

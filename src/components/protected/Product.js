@@ -1,7 +1,9 @@
 import React from "react";
 import createReactClass from "create-react-class";
-import { Grid, Cell, DataTable, TableHeader } from "react-mdl";
+import { Link } from "react-router-dom";
+import { Grid, Cell, DataTable, TableHeader, IconButton } from "react-mdl";
 import { base } from "../../config/constants";
+import { style } from "../../css/styles.js"
 
 var Product = createReactClass({
     componentWillMount: function() {
@@ -26,13 +28,15 @@ var Product = createReactClass({
     mapRawMaterial: function() {
         var rawMaterialArray = [];
 
-        for(var i=0; i<this.state.product[0].rawMaterial.length; i++){
-            var rawMaterial = {
-                no: (i+1),
-                name: this.state.product[0].rawMaterial[i].name,
-                amount: this.state.product[0].rawMaterial[i].amount+" "+this.state.product[0].rawMaterial[i].unit
+        if(this.state.product[0].rawMaterial) {
+            for(var i=0; i<this.state.product[0].rawMaterial.length; i++){
+                var rawMaterial = {
+                    no: (i+1),
+                    name: this.state.product[0].rawMaterial[i].name,
+                    amount: this.state.product[0].rawMaterial[i].amount+" "+this.state.product[0].rawMaterial[i].unit
+                }
+                rawMaterialArray.push(rawMaterial);
             }
-            rawMaterialArray.push(rawMaterial);
         }
 
         return rawMaterialArray;
@@ -41,6 +45,9 @@ var Product = createReactClass({
     render: function() {
         return(
             <Grid>
+                <Cell col={12}>
+                    <Link to={"/dashboard"}><IconButton name="arrow_back" style={style.dashboardViewButtons} /></Link>
+                </Cell>
                 <Cell col={12}>
                     <h1>{this.state.product[0].name}</h1>
                 </Cell>
@@ -51,17 +58,25 @@ var Product = createReactClass({
                     <h4>Details</h4>
                     <h5>{this.state.product[0].details}</h5>
                 </Cell>
-                <Cell col={12}>
-                    <h4>Raw Materials</h4>
-                    <DataTable
-                        shadow={2}
-                        rows={this.mapRawMaterial()}
-                    >
-                        <TableHeader name="no" tooltip="Row number.">No.</TableHeader>
-                        <TableHeader name="name" tooltip="Raw material name.">Name</TableHeader>
-                        <TableHeader name="amount" tooltip="Needed amount of the raw material.">Amount</TableHeader>
-                    </DataTable>
-                </Cell>
+                {
+                    this.mapRawMaterial().length !== 0
+                    ?
+                    <div>
+                        <Cell col={12}>
+                            <h4>Raw Materials</h4>
+                            <DataTable
+                                shadow={2}
+                                rows={this.mapRawMaterial()}
+                            >
+                                <TableHeader name="no" tooltip="Row number.">No.</TableHeader>
+                                <TableHeader name="name" tooltip="Raw material name.">Name</TableHeader>
+                                <TableHeader name="amount" tooltip="Needed amount of the raw material.">Amount</TableHeader>
+                            </DataTable>
+                        </Cell>
+                    </div>
+                    :
+                    <div></div>
+                }
             </Grid>
         );
     }

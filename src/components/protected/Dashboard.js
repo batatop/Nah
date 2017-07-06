@@ -1,9 +1,9 @@
 import React from "react";
 import createReactClass from "create-react-class";
 import { Link } from "react-router-dom";
-import { style } from "../../css/styles.js"
 import { Grid, Cell, Card, CardTitle, CardText, CardActions, ProgressBar, IconButton, List, ListItem, ListItemContent, ListItemAction } from "react-mdl";
 import { base, firebaseAuth } from "../../config/constants";
+import { style } from "../../css/styles.js"
 
 var Dashboard = createReactClass({
     componentWillMount: function() {
@@ -73,7 +73,7 @@ var Dashboard = createReactClass({
                     <ListItemContent><ProgressBar progress={product.info.progress}/></ListItemContent>
                     <ListItemContent>{product.info.afilliated}</ListItemContent>
                     <ListItemAction>
-                    <Link to={"/product/"+product.key}><IconButton name="arrow_forward" /></Link>
+                        <Link to={"/product/"+product.key}><IconButton name="arrow_forward" /></Link>
                     </ListItemAction>
                 </ListItem>
             );
