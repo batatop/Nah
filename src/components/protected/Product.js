@@ -1,7 +1,8 @@
 import React from "react";
 import createReactClass from "create-react-class";
 import { Link } from "react-router-dom";
-import { Grid, Cell, DataTable, TableHeader, IconButton } from "react-mdl";
+import { Grid, Cell, DataTable, TableHeader, IconButton, Textfield } from "react-mdl";
+import CircularProgress from 'material-ui/CircularProgress';
 import { base } from "../../config/constants";
 import { style } from "../../css/styles.js"
 
@@ -25,6 +26,10 @@ var Product = createReactClass({
         });
     },
 
+    handleUpdateAmount: function(){
+        console.log(this.state.finishedAmount);
+    },
+
     mapRawMaterial: function() {
         var rawMaterialArray = [];
 
@@ -42,6 +47,13 @@ var Product = createReactClass({
         return rawMaterialArray;
     },
 
+    getProgress: function() {
+        if(this.state.product[0].amount && this.state.product[0].finished){
+            return (this.state.product[0].finished*100)/this.state.product[0].amount
+        }
+        return 0;
+    },
+
     render: function() {
         return(
             <Grid>
@@ -57,6 +69,21 @@ var Product = createReactClass({
                 <Cell col={12}>
                     <h4>Details</h4>
                     <h5>{this.state.product[0].details}</h5>
+                </Cell>
+                <Cell col={4}>
+                    <h4>Progress ({this.getProgress()}%)</h4>
+                    <CircularProgress
+                        mode="determinate"
+                        value={this.state.product[0].progress}
+                        size={200}
+                        thickness={10}
+                        style={style.productProgress}
+                    />
+                </Cell>
+                <Cell col={8}>
+                    <h4 style={style.invisible}>Null</h4>
+                    <h5>Produced Amount: {this.state.product[0].finished}</h5>
+                    <h5>Total Amount: {this.state.product[0].amount}</h5>
                 </Cell>
                 {
                     this.mapRawMaterial().length !== 0

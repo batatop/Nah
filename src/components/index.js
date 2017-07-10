@@ -2,9 +2,10 @@ import React from "react";
 import createReactClass from 'create-react-class';
 import { Route, BrowserRouter, Redirect, Switch } from "react-router-dom";
 import { firebaseAuth } from "../config/constants";
-import { Grid, Cell, ProgressBar } from "react-mdl";
+import { Grid, Cell } from "react-mdl";
 import 'react-mdl-css/material.css';
 import "react-mdl/extra/material.js";
+import LinearProgress from 'material-ui/LinearProgress';
 import { style } from "../css/styles.js";
 
 // layout
@@ -79,7 +80,7 @@ var App = createReactClass({
                     <Grid>
                         <Cell col={12}>
                             <h3>Loading</h3>
-                            <ProgressBar indeterminate />
+                            <LinearProgress mode="indeterminate" />
                         </Cell>
                     </Grid>
                 </div>

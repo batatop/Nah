@@ -20,7 +20,7 @@ var AddProduct = createReactClass({
             productRawMaterials: [],
             staffs: [],
             rawMaterials: [],
-            progress: 0,
+            finished: 0,
             isSnackbarActive: false
         });
         base.fetch(`users/${currentUser}/`, {
@@ -62,7 +62,8 @@ var AddProduct = createReactClass({
                     afilliated: this.state.afilliated,
                     amount: this.state.amount,
                     details: this.state.details,
-                    rawMaterial: this.state.productRawMaterials
+                    rawMaterial: this.state.productRawMaterials,
+                    finished: this.state.finished
                 }
             },
             then(err){

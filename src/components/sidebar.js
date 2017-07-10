@@ -1,6 +1,7 @@
 import React, { Component } from "react"
-import { Link, NavLink } from "react-router-dom";
-import { Cell, List, ListItem, ListItemContent } from "react-mdl";
+import { NavLink, Link } from "react-router-dom";
+import { Cell } from "react-mdl";
+import { List, ListItem } from 'material-ui/List';
 import { logout } from "../helpers/auth";
 import { style } from "../css/styles.js"
 
@@ -9,99 +10,90 @@ export default class Sidebar extends Component  {
         return (
             <Cell col={12}>
                 <List>
-                    <ListItem>
-                        <ListItemContent>
-                            <h2>Boento</h2>
-                        </ListItemContent>
+                    <ListItem disabled>
+                        <h1>Boento</h1>
                     </ListItem>
                     {this.props.authed
                         ?
                         <span>
-                            <ListItem>
-                                <ListItemContent>
+                            <ListItem
+                                primaryText="Dashboard"
+                                containerElement={
                                     <NavLink
                                         to="/dashboard"
                                         style={style.sidebarLink}
                                         activeStyle={style.sidebarLinkActive}
-                                    >
-                                    Dashboard
-                                    </NavLink>
-                                </ListItemContent>
-                            </ListItem>
-                            <ListItem>
-                                <ListItemContent>
+                                    />
+                                }
+                            />
+                            <ListItem
+                                primaryText="Add Product"
+                                containerElement={
                                     <NavLink
                                         to="/addProduct"
                                         style={style.sidebarLink}
                                         activeStyle={style.sidebarLinkActive}
-                                    >
-                                    Add Product
-                                    </NavLink>
-                                </ListItemContent>
-                            </ListItem>
-                            <ListItem>
-                                <ListItemContent>
+                                    />
+                                }
+                            />
+                            <ListItem
+                                primaryText="Schedule"
+                                containerElement={
                                     <NavLink
                                         to="/schedule"
                                         style={style.sidebarLink}
                                         activeStyle={style.sidebarLinkActive}
-                                    >
-                                    Schedule
-                                    </NavLink>
-                                </ListItemContent>
-                            </ListItem>
-                            <ListItem>
-                                <ListItemContent>
+                                    />
+                                }
+                            />
+                            <ListItem
+                                primaryText="Raw Materials"
+                                containerElement={
                                     <NavLink
                                         to="/rawMaterials"
                                         style={style.sidebarLink}
                                         activeStyle={style.sidebarLinkActive}
-                                    >
-                                    Raw Materials
-                                    </NavLink>
-                                </ListItemContent>
-                            </ListItem>
-                            <ListItem>
-                                <ListItemContent>
+                                    />
+                                }
+                            />
+                            <ListItem
+                                primaryText="Staff"
+                                containerElement={
                                     <NavLink
                                         to="/staff"
                                         style={style.sidebarLink}
                                         activeStyle={style.sidebarLinkActive}
-                                    >
-                                    Staff
-                                    </NavLink>
-                                </ListItemContent>
-                            </ListItem>
-                            <ListItem>
-                                <ListItemContent>
-                                    <a onClick={() => {logout()}} style={style.sidebarLink}>Logout</a>
-                                </ListItemContent>
-                            </ListItem>
+                                    />
+                                }
+                            />
+                            <ListItem
+                                primaryText="Logout"
+                                onClick={() => {logout()}}
+                                style={style.sidebarLink}
+                            />
                         </span>
                         :
                         <span>
-                            <ListItem>
-                                <ListItemContent>
+                            <ListItem
+                                primaryText="Login"
+                                containerElement={
                                     <NavLink
                                         to="/login"
                                         style={style.sidebarLink}
                                         activeStyle={style.sidebarLinkActive}
-                                    >
-                                    Login
-                                    </NavLink>
-                                </ListItemContent>
-                            </ListItem>
-                            <ListItem>
-                                <ListItemContent>
+                                    />
+                                }
+                            />
+                            <ListItem
+                                primaryText="Register"
+                                containerElement={
                                     <NavLink
                                         to="/register"
                                         style={style.sidebarLink}
                                         activeStyle={style.sidebarLinkActive}
-                                    >
-                                    Register
-                                    </NavLink>
-                                </ListItemContent>
-                            </ListItem>
+                                    />
+                                }
+                            />
                         </span>
                     }
                 </List>

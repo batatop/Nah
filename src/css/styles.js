@@ -12,6 +12,10 @@ export const style = {
         margin: 'auto',
     },
 
+    invisible: {
+        visibility: "hidden"
+    },
+
     content: {
         position: "absolute",
         height: "96%",
@@ -19,14 +23,11 @@ export const style = {
         overflow: "auto"
     },
 
-    dropdownContent: {
-        left: "5000px"
-    },
-
     loadingApp: {
         position: "absolute",
         top: "30%",
-        left: "35%",
+        left: "25%",
+        width: "50%",
         margin: 'auto',
         textAlign: "center"
     },
@@ -78,6 +79,16 @@ export const style = {
         width: "100%",
         margin: "0 0 10px 0",
         boxShadow: "0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)"
+    },
+
+    // Product
+    productProgress: {
+        padding: "15px",
+        boxShadow: "0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)"
+    },
+
+    finishedAmountField: {
+        margin: "0 15px 0 0"
     },
 
     dashboardViewButtons: {
