@@ -1,6 +1,6 @@
 import React from "react";
 import createReactClass from "create-react-class";
-import { Grid, Cell, List, ListItem, ListItemContent, Textfield, Button } from "react-mdl";
+import { Grid, Cell, List, ListItem, ListItemContent, Textfield, Button, Icon } from "react-mdl";
 import { base, firebaseAuth } from "../../config/constants";
 import { authStaff } from '../../helpers/auth';
 import { style } from '../../css/styles.js';
@@ -12,7 +12,8 @@ var Staff= createReactClass({
             staffs: [],
             company: "",
             staffHierarcy: 2,
-            hierarchy: ""
+            hierarchy: "",
+            dropdown: false
         });
         base.fetch(`users/${currentUser}/`, {
             context: this,
@@ -41,6 +42,24 @@ var Staff= createReactClass({
             .catch((e) => this.setState({registerError: e.message}));
     },
 
+    handleDropdown: function() {
+        if(this.state.dropdown){
+            this.setState({dropdown: false});
+        }
+        else{
+            this.setState({dropdown: true});
+        }
+    },
+
+    dropdownIcon: function() {
+        if(this.state.dropdown){
+            return <Icon name="keyboard_arrow_up" />
+        }
+        else{
+            return <Icon name="keyboard_arrow_down" />
+        }
+    },
+
     mapListView: function() {
         var listView = this.state.staffs.map(function(staff, i) {
             return (
@@ -66,58 +85,71 @@ var Staff= createReactClass({
                 {
                     this.state.hierarchy === 1
                     ?
-                    <form onSubmit={this.handleSubmit}>
-                        <Cell col={12}>
-                            <Textfield
-                                onChange={(staffHierarcy) => this.setState({staffHierarcy: staffHierarcy.target.value})}
-                                pattern="-?[0-9]*(\.[0-9]+)?"
-                                error="Input is not a number!"
-                                label="Hierarchy"
-                                floatingLabel
-                            />
-                        </Cell>
-                        <Cell col={12}>
-                            <Textfield
-                                onChange={(name) => this.setState({name: name.target.value})}
-                                label="Name"
-                                floatingLabel
-                            />
-                            <Textfield
-                                onChange={(lastName) => this.setState({lastName: lastName.target.value})}
-                                label="Last Name"
-                                floatingLabel
-                            />
-                        </Cell>
-                        <Cell col={12}>
-                            <Textfield
-                                onChange={(email) => this.setState({email: email.target.value})}
-                                label="E-mail"
-                                floatingLabel
-                            />
-                        </Cell>
-                        <Cell col={12}>
-                            <Textfield
-                                onChange={(pw) => this.setState({pw: pw.target.value})}
-                                label="Password"
-                                type="password"
-                                floatingLabel
-                            />
-                        </Cell>
+                    <div>
+                        <Button onClick={this.handleDropdown} style={style.button} raised ripple>New Staff Member {this.dropdownIcon()}</Button>
                         {
-                            this.state.registerError &&
-                            <Cell col={12} style={style.alert} role="alert">
-                                <span>Error:</span>
-                                &nbsp;{this.state.registerError}
-                            </Cell>
+                            this.state.dropdown
+                            ?
+                            <form onSubmit={this.handleSubmit}>
+                                <Grid>
+                                    <Cell col={12}>
+                                        <Textfield
+                                            onChange={(staffHierarcy) => this.setState({staffHierarcy: staffHierarcy.target.value})}
+                                            pattern="-?[0-9]*(\.[0-9]+)?"
+                                            error="Input is not a number!"
+                                            label="Hierarchy"
+                                            floatingLabel
+                                        />
+                                    </Cell>
+                                    <Cell col={6}>
+                                        <Textfield
+                                            onChange={(name) => this.setState({name: name.target.value})}
+                                            label="Name"
+                                            floatingLabel
+                                        />
+                                    </Cell>
+                                    <Cell col={6}>
+                                        <Textfield
+                                            onChange={(lastName) => this.setState({lastName: lastName.target.value})}
+                                            label="Last Name"
+                                            floatingLabel
+                                        />
+                                    </Cell>
+                                    <Cell col={12}>
+                                        <Textfield
+                                            onChange={(email) => this.setState({email: email.target.value})}
+                                            label="E-mail"
+                                            floatingLabel
+                                        />
+                                    </Cell>
+                                    <Cell col={12}>
+                                        <Textfield
+                                            onChange={(pw) => this.setState({pw: pw.target.value})}
+                                            label="Password"
+                                            type="password"
+                                            floatingLabel
+                                        />
+                                    </Cell>
+                                    {
+                                        this.state.registerError &&
+                                        <Cell col={12} style={style.alert} role="alert">
+                                            <span>Error:</span>
+                                            &nbsp;{this.state.registerError}
+                                        </Cell>
+                                    }
+                                    <Cell col={12}>
+                                        <Button type="submit" style={style.button} raised ripple>Register Staff Member</Button>
+                                    </Cell>
+                                </Grid>
+                            </form>
+                            :
+                            <div></div>
                         }
-                        <Cell col={12}>
-                            <Button type="submit" raised ripple>Register Staff Member</Button>
-                        </Cell>
-                    </form>
+                    </div>
                     :
                     <div></div>
                 }
-                <Cell>
+                <Cell col={12}>
                     <List>
                         {this.mapListView()}
                     </List>

@@ -65,7 +65,7 @@ var Product = createReactClass({
                         <Cell col={12}>
                             <h4>Raw Materials</h4>
                             <DataTable
-                                shadow={2}
+                                style={style.dataTable}
                                 rows={this.mapRawMaterial()}
                             >
                                 <TableHeader name="no" tooltip="Row number.">No.</TableHeader>

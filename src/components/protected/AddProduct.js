@@ -3,6 +3,7 @@ import createReactClass from 'create-react-class';
 import { Grid, Cell, Textfield, Button, FABButton, Icon, DataTable, TableHeader, Snackbar } from 'react-mdl'
 import { AutoComplete } from "react-mdl-extra";
 import { base, firebaseAuth } from '../../config/constants'
+import { style } from "../../css/styles.js"
 
 var AddProduct = createReactClass({
     componentWillMount: function() {
@@ -246,6 +247,7 @@ var AddProduct = createReactClass({
                     <Cell col={1}>
                         <FABButton
                             onClick={this.handleAddMaterial}
+                            style={style.button}
                             ripple
                         >
                             <Icon name="add" />
@@ -257,7 +259,7 @@ var AddProduct = createReactClass({
                             ?
                             <div>
                                 <DataTable
-                                    shadow={2}
+                                    style={style.dataTable}
                                     rows={this.mapRawMaterial()}
                                 >
                                     <TableHeader name="no" tooltip="Row number.">No.</TableHeader>
@@ -270,7 +272,7 @@ var AddProduct = createReactClass({
                         }
                     </Cell>
                     <Cell col={12}>
-                        <Button onClick={this.handleAddProduct} raised ripple>Add Product</Button>
+                        <Button onClick={this.handleAddProduct} style={style.button} raised ripple>Add Product</Button>
                     </Cell>
                 </Grid>
                 <Snackbar

@@ -57,7 +57,7 @@ var Login = createReactClass({
                         </Cell>
                     }
                     <Cell col={12}>
-                        <Button type="submit" raised ripple>Login</Button>
+                        <Button type="submit" style={style.button} raised ripple>Login</Button>
                     </Cell>
                 </form>
             </Grid>

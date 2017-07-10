@@ -1,7 +1,7 @@
 import React from "react";
 import createReactClass from "create-react-class";
 import { Link } from "react-router-dom";
-import { Grid, Cell, Card, CardTitle, CardText, CardActions, ProgressBar, IconButton, List, ListItem, ListItemContent, ListItemAction } from "react-mdl";
+import { Grid, Cell, Card, CardTitle, CardText, CardActions, ProgressBar, IconButton, List, ListItem, ListItemContent, ListItemAction, Button } from "react-mdl";
 import { base, firebaseAuth } from "../../config/constants";
 import { style } from "../../css/styles.js"
 
@@ -46,7 +46,7 @@ var Dashboard = createReactClass({
         var cardView = this.state.products.map(function(product, i) {
             return (
                 <Cell key={"ProductCard_"+i} col={4}>
-                    <Card shadow={2} style={style.productModule}>
+                    <Card style={style.productModule}>
                         <CardTitle>
                             {product.info.name}<br />
                             {product.info.afilliated}
@@ -96,7 +96,7 @@ var Dashboard = createReactClass({
                         </Grid>
                         :
                         <Grid>
-                            <List>
+                            <List  style={style.fullWidth}>
                                 {this.mapListView()}
                             </List>
                         </Grid>

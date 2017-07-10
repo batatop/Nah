@@ -11,7 +11,7 @@ export default class Sidebar extends Component  {
                 <List>
                     <ListItem>
                         <ListItemContent>
-                            <h1>Nah</h1>
+                            <h2>Boento</h2>
                         </ListItemContent>
                     </ListItem>
                     {this.props.authed
@@ -82,12 +82,24 @@ export default class Sidebar extends Component  {
                         <span>
                             <ListItem>
                                 <ListItemContent>
-                                    <Link to="/login" style={style.sidebarLink}>Login</Link>
+                                    <NavLink
+                                        to="/login"
+                                        style={style.sidebarLink}
+                                        activeStyle={style.sidebarLinkActive}
+                                    >
+                                    Login
+                                    </NavLink>
                                 </ListItemContent>
                             </ListItem>
                             <ListItem>
                                 <ListItemContent>
-                                    <Link to="/register" style={style.sidebarLink}>Register</Link>
+                                    <NavLink
+                                        to="/register"
+                                        style={style.sidebarLink}
+                                        activeStyle={style.sidebarLinkActive}
+                                    >
+                                    Register
+                                    </NavLink>
                                 </ListItemContent>
                             </ListItem>
                         </span>

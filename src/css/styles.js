@@ -1,14 +1,26 @@
 export const style = {
+
+    // General
+    fullWidth: {
+        width: "100%"
+    },
+
     container: {
         position: "absolute",
-        backgroundColor: "#f5f5f5",
-        borderRadius: '7px',
-        border: '2px solid #e8e8e8',
-        boxShadow: '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)',
-        width: '80%',
-        top: "5%",
-        left: "10%",
+        height: "100%",
+        width: '100%',
         margin: 'auto',
+    },
+
+    content: {
+        position: "absolute",
+        height: "96%",
+        left: "25%",
+        overflow: "auto"
+    },
+
+    dropdownContent: {
+        left: "5000px"
     },
 
     loadingApp: {
@@ -26,50 +38,49 @@ export const style = {
 
     alert: {
         padding: "20px",
-        backgroundColor: "#f44336",
-        color: "white",
         opacity: 1,
         marginBottom: "20px"
     },
 
-    sidebar: {
-        backgroundColor: "#f0f0f0",
-        boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)'
+    dataTable: {
+        boxShadow: "0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)"
     },
 
-    content: {
-        height: "650px",
-        overflow: "auto"
+    button: {
+        boxShadow: "0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)"
+    },
+
+    // Sidebar
+    sidebar: {
+        position: "absolute",
+        height: "96%",
+        boxShadow: "0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)"
     },
 
     sidebarLink: {
-        color: "#212121",
         textDecoration: "none",
         border: "none"
     },
 
     sidebarLinkActive: {
-        color: "#212121",
         fontWeight: "bold",
         textDecoration: "none",
         border: "none"
     },
 
+    // Dashboard
     productModule: {
-        width: "100%"
+        width: "100%",
+        boxShadow: "0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)"
     },
 
     productList: {
-        backgroundColor: "white",
+        width: "100%",
         margin: "0 0 10px 0",
-        boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)'
+        boxShadow: "0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)"
     },
 
     dashboardViewButtons: {
         float: "right"
-    },
-
-    deneme: {
-            height: "10px"
     }
 };

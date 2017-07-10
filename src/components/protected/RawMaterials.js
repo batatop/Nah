@@ -1,7 +1,8 @@
 import React from "react";
 import createReactClass from "create-react-class";
-import { Grid, Cell, DataTable, TableHeader, Textfield, Button } from "react-mdl";
+import { Grid, Cell, DataTable, TableHeader, Textfield, Button, Icon } from "react-mdl";
 import { base, firebaseAuth } from "../../config/constants";
+import { style } from "../../css/styles.js"
 
 var RawMaterials = createReactClass({
     componentWillMount() {
@@ -12,7 +13,8 @@ var RawMaterials = createReactClass({
             company: "",
             inStock: "",
             unit: "",
-            hierarchy: ""
+            hierarchy: "",
+            dropdown: false
         });
         base.fetch(`users/${currentUser}/`, {
             context: this,
@@ -27,16 +29,20 @@ var RawMaterials = createReactClass({
                         equalTo: user[0].company
                     }
                 });
+                base.syncState(`rawMaterials`, {
+                    context: this,
+                    state: 'rawMaterials',
+                    asArray: true,
+                    queries: {
+                        orderByChild: `info/company`,
+                        equalTo: user[0].company
+                    }
+                });
                 this.setState({
                     company: user[0].company,
                     hierarchy: user[0].hierarchy
                 });
             }
-        });
-        base.syncState(`rawMaterials`, {
-            context: this,
-            state: 'rawMaterials',
-            asArray: true
         });
     },
 
@@ -63,6 +69,24 @@ var RawMaterials = createReactClass({
         });
     },
 
+    handleDropdown: function() {
+        if(this.state.dropdown){
+            this.setState({dropdown: false});
+        }
+        else{
+            this.setState({dropdown: true});
+        }
+    },
+
+    dropdownIcon: function() {
+        if(this.state.dropdown){
+            return <Icon name="keyboard_arrow_up" />
+        }
+        else{
+            return <Icon name="keyboard_arrow_down" />
+        }
+    },
+
     mapRawMaterial: function() {
         var rawMaterialArray = [];
 
@@ -79,6 +103,7 @@ var RawMaterials = createReactClass({
     },
 
     render() {
+        console.log(this.state.dropdown);
         return (
             <Grid>
                 <Cell col={12}>
@@ -88,48 +113,59 @@ var RawMaterials = createReactClass({
                     this.state.hierarchy === 1
                     ?
                     <div>
-                        <Cell col={12}>
-                            <Textfield
-                                value={this.state.name}
-                                onChange={(name) => this.setState({name: name.target.value})}
-                                label="Raw Material Name"
-                                floatingLabel
-                            />
-                        </Cell>
-                        <Cell col={12}>
-                            <Textfield
-                                value={this.state.inStock}
-                                onChange={(inStock) => this.setState({inStock: inStock.target.value})}
-                                label="In Stock"
-                                pattern="-?[0-9]*(\.[0-9]+)?"
-                                error="Input has to be a number."
-                                floatingLabel
-                            />
-                            <Textfield
-                                value={this.state.unit}
-                                onChange={(unit) => this.setState({unit: unit.target.value})}
-                                label="Unit"
-                                floatingLabel
-                            />
-                        </Cell>
-                        <Cell col={12}>
-                            <Button onClick={this.handleAddRawMaterial} raised ripple>Add Raw Material</Button>
-                        </Cell>
+                        <Button onClick={this.handleDropdown} style={style.button} raised ripple>New Raw Material {this.dropdownIcon()}</Button>
+                        {
+                            this.state.dropdown
+                            ?
+                            <Grid>
+                                <Cell col={12}>
+                                    <Textfield
+                                        value={this.state.name}
+                                        onChange={(name) => this.setState({name: name.target.value})}
+                                        label="Raw Material Name"
+                                        floatingLabel
+                                    />
+                                </Cell>
+                                <Cell col={6}>
+                                    <Textfield
+                                        value={this.state.inStock}
+                                        onChange={(inStock) => this.setState({inStock: inStock.target.value})}
+                                        label="In Stock"
+                                        pattern="-?[0-9]*(\.[0-9]+)?"
+                                        error="Input has to be a number."
+                                        floatingLabel
+                                    />
+                                </Cell>
+                                <Cell col={6}>
+                                    <Textfield
+                                        value={this.state.unit}
+                                        onChange={(unit) => this.setState({unit: unit.target.value})}
+                                        label="Unit"
+                                        floatingLabel
+                                    />
+                                </Cell>
+                                <Cell col={12}>
+                                    <Button onClick={this.handleAddRawMaterial} style={style.button} raised ripple>Add Raw Material</Button>
+                                </Cell>
+                            </Grid>
+                            :
+                            <div></div>
+                        }
                     </div>
                     :
                     <div></div>
                 }
-                <Cell col={12}>
-                    <h4>Raw Materials</h4>
-                    <DataTable
-                        shadow={2}
-                        rows={this.mapRawMaterial()}
-                    >
-                        <TableHeader name="no" tooltip="Row number.">No.</TableHeader>
-                        <TableHeader name="name" tooltip="Raw material name.">Name</TableHeader>
-                        <TableHeader name="stock" tooltip="Raw material in stock">In Stock</TableHeader>
-                    </DataTable>
-                </Cell>
+                    <Cell col={12}>
+                        <h4>Raw Materials</h4>
+                        <DataTable
+                            style={style.dataTable}
+                            rows={this.mapRawMaterial()}
+                        >
+                            <TableHeader name="no" tooltip="Row number.">No.</TableHeader>
+                            <TableHeader name="name" tooltip="Raw material name.">Name</TableHeader>
+                            <TableHeader name="stock" tooltip="Raw material in stock">In Stock</TableHeader>
+                        </DataTable>
+                    </Cell>
             </Grid>
         );
     }

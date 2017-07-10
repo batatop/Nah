@@ -3,7 +3,7 @@ import createReactClass from 'create-react-class';
 import { Route, BrowserRouter, Redirect, Switch } from "react-router-dom";
 import { firebaseAuth } from "../config/constants";
 import { Grid, Cell, ProgressBar } from "react-mdl";
-import "react-mdl/extra/material.css";
+import 'react-mdl-css/material.css';
 import "react-mdl/extra/material.js";
 import { style } from "../css/styles.js";
 
