@@ -13,8 +13,9 @@ var RawMaterials = createReactClass({
             company: "",
             inStock: "",
             unit: "",
+            reserved: 0,
             hierarchy: "",
-            dropdown: false
+            dropdown: false,
         });
         base.fetch(`users/${currentUser}/`, {
             context: this,
@@ -54,7 +55,8 @@ var RawMaterials = createReactClass({
                     name: this.state.name,
                     company: this.state.company,
                     inStock: this.state.inStock,
-                    unit: this.state.unit
+                    unit: this.state.unit,
+                    reserved: 0
                 }
             },
             then(err){

@@ -14,6 +14,7 @@ var AddProduct = createReactClass({
             afilliated: "",
             amount: "",
             details: "",
+            productRawMaterialKey: "",
             productRawMaterialName: "",
             productRawMaterialAmount: "",
             productRawMaterialUnit: "",
@@ -68,11 +69,13 @@ var AddProduct = createReactClass({
             },
             then(err){
                 if(!err){
+                    console.log(self.state);
                     self.setState({
                         name: "",
                         afilliated: "",
                         amount: "",
                         details: "",
+                        productRawMaterialKey: "",
                         productRawMaterialName: "",
                         productRawMaterialAmount: "",
                         productRawMaterialUnit: "",
@@ -88,6 +91,7 @@ var AddProduct = createReactClass({
         var valid = true;
         var rawMaterialState = this.state.productRawMaterials;
         var rawMaterial = {
+            id: "",
             name: "",
             amount: "",
             unit: ""
@@ -100,6 +104,7 @@ var AddProduct = createReactClass({
             valid = false;
         }
         if(valid) {
+            rawMaterial.id = this.state.productRawMaterialKey;
             rawMaterial.name = this.state.productRawMaterialName;
             rawMaterial.amount = this.state.productRawMaterialAmount;
             rawMaterial.unit = this.state.productRawMaterialUnit;
@@ -141,7 +146,7 @@ var AddProduct = createReactClass({
         return rawMaterialList;
     },
 
-    setRawMaterialUnit: function(productRawMaterialName) {
+    setRawMaterialInfo: function(productRawMaterialName) {
         base.fetch('rawMaterials', {
             context: this,
             asArray: true,
@@ -151,7 +156,10 @@ var AddProduct = createReactClass({
             },
             then(data){
                 if(data[0]) {
-                    this.setState({productRawMaterialUnit: data[0].info.unit});
+                    this.setState({
+                        productRawMaterialKey: data[0].key,
+                        productRawMaterialUnit: data[0].info.unit
+                    });
                 }
                 else {
                     this.setState({productRawMaterialUnit: ""});
@@ -222,7 +230,7 @@ var AddProduct = createReactClass({
                         <AutoComplete
                             value={this.state.productRawMaterialName}
                             onChange={(productRawMaterialName) => {
-                                this.setRawMaterialUnit(productRawMaterialName);
+                                this.setRawMaterialInfo(productRawMaterialName);
                                 this.setState({productRawMaterialName: productRawMaterialName});
                             }}
                             label="Raw Materials"

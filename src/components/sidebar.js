@@ -21,14 +21,14 @@ var Sidebar = createReactClass({
     },
 
     setNavColor: function(activeLink){
-        if(activeLink == this.state.activeLink){
+        if(activeLink === this.state.activeLink){
             return style.sidebarLinkActive;
         }
         return style.sidebarLink;
     },
 
     setIconColor: function(activeLink){
-        if(activeLink == this.state.activeLink){
+        if(activeLink === this.state.activeLink){
             return teal600;
         }
         return grey500;

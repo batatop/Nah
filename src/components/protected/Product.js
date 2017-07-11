@@ -5,11 +5,12 @@ import { Grid, Cell, DataTable, TableHeader, IconButton } from "react-mdl";
 import TextField from 'material-ui/TextField';
 import CircularProgress from 'material-ui/CircularProgress';
 import RaisedButton from 'material-ui/RaisedButton';
-import { base } from "../../config/constants";
+import { base, firebaseAuth } from "../../config/constants";
 import { style } from "../../css/styles.js"
 
 var Product = createReactClass({
     componentWillMount: function() {
+        var currentUser = firebaseAuth().currentUser.uid;
         this.setState({
             product: [{
                 affiliated: "",
@@ -21,7 +22,32 @@ var Product = createReactClass({
                 name: "",
                 rawMaterial: [],
             }],
+            rawMaterials: [],
             finishedAmount: ""
+        });
+        base.fetch(`users/${currentUser}/`, {
+            context: this,
+            asArray: true,
+            then(user) {
+                base.syncState("users", {
+                    context: this,
+                    asArray: true,
+                    state: "staffs",
+                    queries: {
+                        orderByChild: `info/company`,
+                        equalTo: user[0].company
+                    }
+                });
+                base.syncState(`rawMaterials`, {
+                    context: this,
+                    state: 'rawMaterials',
+                    asArray: true,
+                    queries: {
+                        orderByChild: `info/company`,
+                        equalTo: user[0].company
+                    }
+                });
+            }
         });
         base.syncState(`products/${this.props.match.params.productId}`, {
             context: this,
@@ -32,7 +58,7 @@ var Product = createReactClass({
 
     handleUpdateAmount: function(){
         var tempProduct = this.state.product;
-        tempProduct[0].finished = parseInt(tempProduct[0].finished)+parseInt(this.state.finishedAmount);
+        tempProduct[0].finished = parseInt(tempProduct[0].finished, 10)+parseInt(this.state.finishedAmount, 10);
         var updatedProduct = {
             info: tempProduct[0]
         }
@@ -41,13 +67,14 @@ var Product = createReactClass({
 
     mapRawMaterial: function() {
         var rawMaterialArray = [];
-
         if(this.state.product[0].rawMaterial) {
             for(var i=0; i<this.state.product[0].rawMaterial.length; i++){
                 var rawMaterial = {
                     no: (i+1),
                     name: this.state.product[0].rawMaterial[i].name,
-                    amount: this.state.product[0].rawMaterial[i].amount+" "+this.state.product[0].rawMaterial[i].unit
+                    amount: this.state.product[0].rawMaterial[i].amount+" "+this.state.product[0].rawMaterial[i].unit,
+                    reserved: (this.state.product[0].rawMaterial[i].amount*this.state.product[0].amount)+" "+this.state.product[0].rawMaterial[i].unit,
+                    inStock: this.state.product[0].rawMaterial[i].inStock+" "+this.state.product[0].rawMaterial[i].unit,
                 }
                 rawMaterialArray.push(rawMaterial);
             }
@@ -64,6 +91,7 @@ var Product = createReactClass({
     },
 
     render: function() {
+        console.log(this.state.rawMaterials);
         return(
             <Grid>
                 <Cell col={12}>
@@ -117,7 +145,9 @@ var Product = createReactClass({
                             >
                                 <TableHeader name="no" tooltip="Row number.">No.</TableHeader>
                                 <TableHeader name="name" tooltip="Raw material name.">Name</TableHeader>
-                                <TableHeader name="amount" tooltip="Needed amount of the raw material.">Amount</TableHeader>
+                                <TableHeader name="amount" tooltip="Needed amount for one product.">Amount</TableHeader>
+                                <TableHeader name="reserved" tooltip="Raw material in the stock.">Reserved</TableHeader>
+                                <TableHeader name="inStock" tooltip="Raw material in the stock.">In Stock</TableHeader>
                             </DataTable>
                         </Cell>
                     </div>
