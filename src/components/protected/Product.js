@@ -2,7 +2,9 @@ import React from "react";
 import createReactClass from "create-react-class";
 import { Link } from "react-router-dom";
 import { Grid, Cell, DataTable, TableHeader, IconButton } from "react-mdl";
+import TextField from 'material-ui/TextField';
 import CircularProgress from 'material-ui/CircularProgress';
+import RaisedButton from 'material-ui/RaisedButton';
 import { base } from "../../config/constants";
 import { style } from "../../css/styles.js"
 
@@ -14,10 +16,12 @@ var Product = createReactClass({
                 amount: "",
                 company: "",
                 details: "",
+                finished: 0,
                 key: "",
                 name: "",
-                rawMaterial: []
-            }]
+                rawMaterial: [],
+            }],
+            finishedAmount: ""
         });
         base.syncState(`products/${this.props.match.params.productId}`, {
             context: this,
@@ -27,7 +31,12 @@ var Product = createReactClass({
     },
 
     handleUpdateAmount: function(){
-        console.log(this.state.finishedAmount);
+        var tempProduct = this.state.product;
+        tempProduct[0].finished = parseInt(tempProduct[0].finished)+parseInt(this.state.finishedAmount);
+        var updatedProduct = {
+            info: tempProduct[0]
+        }
+        this.setState({product: updatedProduct});
     },
 
     mapRawMaterial: function() {
@@ -71,12 +80,12 @@ var Product = createReactClass({
                     <h5>{this.state.product[0].details}</h5>
                 </Cell>
                 <Cell col={4}>
-                    <h4>Progress ({this.getProgress()}%)</h4>
+                    <h4>Progress ({Math.round(this.getProgress())}%)</h4>
                     <CircularProgress
                         mode="determinate"
-                        value={this.state.product[0].progress}
+                        value={this.getProgress()}
                         size={200}
-                        thickness={10}
+                        thickness={13}
                         style={style.productProgress}
                     />
                 </Cell>
@@ -84,6 +93,17 @@ var Product = createReactClass({
                     <h4 style={style.invisible}>Null</h4>
                     <h5>Produced Amount: {this.state.product[0].finished}</h5>
                     <h5>Total Amount: {this.state.product[0].amount}</h5>
+                    <TextField
+                        value={this.state.finishedAmount}
+                        onChange={(finishedAmount) => {this.setState({finishedAmount: finishedAmount.target.value})}}
+                        hintText="Add to the finished amount"
+                        floatingLabelText="Update Amount"
+                    />
+                    <RaisedButton
+                        label="Update"
+                        onClick={this.handleUpdateAmount}
+                        style={style.updateButton}
+                    />
                 </Cell>
                 {
                     this.mapRawMaterial().length !== 0

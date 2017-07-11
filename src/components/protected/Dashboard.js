@@ -1,6 +1,7 @@
 import React from "react";
 import createReactClass from "create-react-class";
 import { Link } from "react-router-dom";
+import LinearProgress from 'material-ui/LinearProgress';
 import { Grid, Cell, Card, CardTitle, CardText, CardActions, ProgressBar, IconButton, List, ListItem, ListItemContent, ListItemAction } from "react-mdl";
 import { base, firebaseAuth } from "../../config/constants";
 import { style } from "../../css/styles.js"
@@ -57,7 +58,7 @@ var Dashboard = createReactClass({
                         <CardActions border>
                             <Link to={"/product/"+product.key}>Details</Link>
                         </CardActions>
-                        <ProgressBar progress={product.info.progress} />
+                        <LinearProgress mode="determinate" value={(product.info.finished*100)/product.info.amount} />
                     </Card>
                 </Cell>
             );
@@ -70,7 +71,7 @@ var Dashboard = createReactClass({
             return (
                 <ListItem key={"ProductList_"+i} style={style.productList}>
                     <ListItemContent>{product.info.name}</ListItemContent>
-                    <ListItemContent><ProgressBar progress={product.info.progress}/></ListItemContent>
+                    <LinearProgress mode="determinate" value={(product.info.finished*100)/product.info.amount} />
                     <ListItemContent>{product.info.afilliated}</ListItemContent>
                     <ListItemAction>
                         <Link to={"/product/"+product.key}><IconButton name="arrow_forward" /></Link>
@@ -96,7 +97,7 @@ var Dashboard = createReactClass({
                         </Grid>
                         :
                         <Grid>
-                            <List  style={style.fullWidth}>
+                            <List style={style.fullWidth}>
                                 {this.mapListView()}
                             </List>
                         </Grid>

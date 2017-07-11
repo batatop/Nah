@@ -100,6 +100,10 @@ export const style = {
         float: "right"
     },
 
+    updateButton: {
+        margin: "16px"
+    },
+
     // Header
     header: {
         position: "absolute",
