@@ -18,8 +18,10 @@ export const style = {
 
     content: {
         position: "absolute",
-        height: "96%",
+        height: "93%",
         left: "25%",
+        top: "7%",
+        width: "75%",
         overflow: "auto"
     },
 
@@ -54,19 +56,22 @@ export const style = {
     // Sidebar
     sidebar: {
         position: "absolute",
-        height: "96%",
+        height: "93%",
+        top: "7%",
+        width: "25%",
         boxShadow: "0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)"
     },
 
     sidebarLink: {
-        textDecoration: "none",
-        border: "none"
+        fontWeight: "bold",
+        color: "#9E9E9E"
     },
 
     sidebarLinkActive: {
         fontWeight: "bold",
-        textDecoration: "none",
-        border: "none"
+        color: "#00897B",
+        borderLeft: "5px solid #00897B",
+        backgroundColor: "#E0F2F1"
     },
 
     // Dashboard
@@ -93,5 +98,16 @@ export const style = {
 
     dashboardViewButtons: {
         float: "right"
+    },
+
+    // Header
+    header: {
+        position: "absolute",
+        boxShadow: "0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)",
+        width: "100%"
+    },
+
+    headerItem: {
+        color: "white"
     }
 };

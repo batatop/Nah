@@ -103,7 +103,6 @@ var RawMaterials = createReactClass({
     },
 
     render() {
-        console.log(this.state.dropdown);
         return (
             <Grid>
                 <Cell col={12}>

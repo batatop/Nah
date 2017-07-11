@@ -1,7 +1,7 @@
 import React from "react";
 import createReactClass from "create-react-class";
 import { Link } from "react-router-dom";
-import { Grid, Cell, DataTable, TableHeader, IconButton, Textfield } from "react-mdl";
+import { Grid, Cell, DataTable, TableHeader, IconButton } from "react-mdl";
 import CircularProgress from 'material-ui/CircularProgress';
 import { base } from "../../config/constants";
 import { style } from "../../css/styles.js"

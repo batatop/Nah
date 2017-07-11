@@ -2,7 +2,6 @@ import React from "react";
 import createReactClass from 'create-react-class';
 import { Route, BrowserRouter, Redirect, Switch } from "react-router-dom";
 import { firebaseAuth } from "../config/constants";
-import { Grid, Cell } from "react-mdl";
 import 'react-mdl-css/material.css';
 import "react-mdl/extra/material.js";
 import LinearProgress from 'material-ui/LinearProgress';
@@ -10,6 +9,7 @@ import { style } from "../css/styles.js";
 
 // layout
 import Sidebar from "./sidebar";
+import Header from "./header";
 // protected
 import Dashboard from "./protected/Dashboard";
 import AddProduct from "./protected/AddProduct";
@@ -47,7 +47,8 @@ var App = createReactClass({
     componentWillMount: function() {
         this.setState({
             authed: false,
-            loading: true
+            loading: true,
+            location: location.pathname
         });
     },
 
@@ -77,39 +78,34 @@ var App = createReactClass({
             ?
             (
                 <div style={style.loadingApp}>
-                    <Grid>
-                        <Cell col={12}>
-                            <h3>Loading</h3>
-                            <LinearProgress mode="indeterminate" />
-                        </Cell>
-                    </Grid>
+                    <h3>Loading</h3>
+                    <LinearProgress mode="indeterminate" />
                 </div>
             )
             :
             (
                 <BrowserRouter>
                     <div style={style.container}>
-                        <Grid>
-                            <Cell col={3} style={style.sidebar}>
-                                <Grid>
-                                    <Sidebar authed={this.state.authed} />
-                                </Grid>
-                            </Cell>
-                            <Cell col={9} style={style.content}>
-                                <Switch>
-                                    <PublicRoute authed={this.state.authed} path="/login" component={Login} />
-                                    <PublicRoute authed={this.state.authed} path="/register" component={Register} />
-                                    <PrivateRoute authed={this.state.authed} path="/dashboard" component={Dashboard} />
-                                    <PrivateRoute authed={this.state.authed} path="/addProduct" component={AddProduct} />
-                                    <PrivateRoute authed={this.state.authed} path="/product/:productId" component={Product} />
-                                    <PrivateRoute authed={this.state.authed} path="/rawMaterials" component={RawMaterials} />
-                                    <PrivateRoute authed={this.state.authed} path="/schedule" component={Schedule} />
-                                    <PrivateRoute authed={this.state.authed} path="/staff" component={Staff} />
-                                    <Redirect from="/" to="/dashboard"/>
-                                    <Route render={() => <h3>No Match</h3>} />
-                                </Switch>
-                            </Cell>
-                        </Grid>
+                        <div style={style.header}>
+                            <Header authed={this.state.authed} />
+                        </div>
+                        <div style={style.sidebar}>
+                            <Sidebar authed={this.state.authed} />
+                        </div>
+                        <div style={style.content}>
+                            <Switch>
+                                <PublicRoute authed={this.state.authed} path="/login" component={Login} />
+                                <PublicRoute authed={this.state.authed} path="/register" component={Register} />
+                                <PrivateRoute authed={this.state.authed} path="/dashboard" component={Dashboard} />
+                                <PrivateRoute authed={this.state.authed} path="/addProduct" component={AddProduct} />
+                                <PrivateRoute authed={this.state.authed} path="/product/:productId" component={Product} />
+                                <PrivateRoute authed={this.state.authed} path="/rawMaterials" component={RawMaterials} />
+                                <PrivateRoute authed={this.state.authed} path="/schedule" component={Schedule} />
+                                <PrivateRoute authed={this.state.authed} path="/staff" component={Staff} />
+                                <Redirect from="/" to="/dashboard"/>
+                                <Route render={() => <h3>No Match</h3>} />
+                            </Switch>
+                        </div>
                     </div>
                 </BrowserRouter>
             );

@@ -1,103 +1,149 @@
-import React, { Component } from "react"
-import { NavLink, Link } from "react-router-dom";
-import { Cell } from "react-mdl";
+import React from "react"
+import { NavLink } from "react-router-dom";
+import createReactClass from 'create-react-class';
 import { List, ListItem } from 'material-ui/List';
 import { logout } from "../helpers/auth";
 import { style } from "../css/styles.js"
+import Stop from 'material-ui/svg-icons/av/stop';
+import {teal600, teal50, grey500} from 'material-ui/styles/colors';
 
-export default class Sidebar extends Component  {
+var Sidebar = createReactClass({
+    componentWillMount: function(){
+        this.setState({
+            fontColor: teal600,
+            hoverColor: teal50,
+            activeLink: location.pathname
+        });
+    },
+
+    handleActiveLink: function(activeLink) {
+        this.setState({activeLink: activeLink});
+    },
+
+    setNavColor: function(activeLink){
+        if(activeLink == this.state.activeLink){
+            return style.sidebarLinkActive;
+        }
+        return style.sidebarLink;
+    },
+
+    setIconColor: function(activeLink){
+        if(activeLink == this.state.activeLink){
+            return teal600;
+        }
+        return grey500;
+    },
+
     render() {
         return (
-            <Cell col={12}>
-                <List>
-                    <ListItem disabled>
-                        <h1>Boento</h1>
-                    </ListItem>
-                    {this.props.authed
-                        ?
-                        <span>
-                            <ListItem
-                                primaryText="Dashboard"
-                                containerElement={
-                                    <NavLink
-                                        to="/dashboard"
-                                        style={style.sidebarLink}
-                                        activeStyle={style.sidebarLinkActive}
-                                    />
+            <List>
+                {this.props.authed
+                    ?
+                    <span>
+                        <ListItem
+                            primaryText="Dashboard"
+                            leftIcon={<Stop color={this.setIconColor("/dashboard")} />}
+                            hoverColor={this.state.hoverColor}
+                            style={this.setNavColor("/dashboard")}
+                            onClick={this.handleActiveLink.bind(null, "/dashboard")}
+                            containerElement={
+                                <NavLink
+                                    to="/dashboard"
+                                />
+                            }
+                        />
+                        <ListItem
+                            primaryText="Add Product"
+                            leftIcon={<Stop color={this.setIconColor("/addProduct")} />}
+                            hoverColor={teal50}
+                            style={this.setNavColor("/addProduct")}
+                            onClick={this.handleActiveLink.bind(null, "/addProduct")}
+                            containerElement={
+                                <NavLink
+                                    to="/addProduct"
+                                />
+                            }
+                        />
+                        <ListItem
+                            primaryText="Schedule"
+                            leftIcon={<Stop color={this.setIconColor("/schedule")} />}
+                            hoverColor={teal50}
+                            style={this.setNavColor("/schedule")}
+                            onClick={this.handleActiveLink.bind(null, "/schedule")}
+                            containerElement={
+                                <NavLink
+                                    to="/schedule"
+                                />
+                            }
+                        />
+                        <ListItem
+                            primaryText="Raw Materials"
+                            leftIcon={<Stop color={this.setIconColor("/rawMaterials")} />}
+                            hoverColor={teal50}
+                            style={this.setNavColor("/rawMaterials")}
+                            onClick={this.handleActiveLink.bind(null, "/rawMaterials")}
+                            containerElement={
+                                <NavLink
+                                    to="/rawMaterials"
+                                />
+                            }
+                        />
+                        <ListItem
+                            primaryText="Staff"
+                            leftIcon={<Stop color={this.setIconColor("/staff")} />}
+                            hoverColor={teal50}
+                            style={this.setNavColor("/staff")}
+                            onClick={this.handleActiveLink.bind(null, "/staff")}
+                            containerElement={
+                                <NavLink
+                                    to="/staff"
+                                />
+                            }
+                        />
+                        <ListItem
+                            primaryText="Logout"
+                            leftIcon={<Stop color={this.setIconColor("/logout")} />}
+                            hoverColor={teal50}
+                            style={this.setNavColor("/logout")}
+                            onClick={
+                                () => {
+                                    this.handleActiveLink("/login")
+                                    logout()
                                 }
-                            />
-                            <ListItem
-                                primaryText="Add Product"
-                                containerElement={
-                                    <NavLink
-                                        to="/addProduct"
-                                        style={style.sidebarLink}
-                                        activeStyle={style.sidebarLinkActive}
-                                    />
-                                }
-                            />
-                            <ListItem
-                                primaryText="Schedule"
-                                containerElement={
-                                    <NavLink
-                                        to="/schedule"
-                                        style={style.sidebarLink}
-                                        activeStyle={style.sidebarLinkActive}
-                                    />
-                                }
-                            />
-                            <ListItem
-                                primaryText="Raw Materials"
-                                containerElement={
-                                    <NavLink
-                                        to="/rawMaterials"
-                                        style={style.sidebarLink}
-                                        activeStyle={style.sidebarLinkActive}
-                                    />
-                                }
-                            />
-                            <ListItem
-                                primaryText="Staff"
-                                containerElement={
-                                    <NavLink
-                                        to="/staff"
-                                        style={style.sidebarLink}
-                                        activeStyle={style.sidebarLinkActive}
-                                    />
-                                }
-                            />
-                            <ListItem
-                                primaryText="Logout"
-                                onClick={() => {logout()}}
-                                style={style.sidebarLink}
-                            />
-                        </span>
-                        :
-                        <span>
-                            <ListItem
-                                primaryText="Login"
-                                containerElement={
-                                    <NavLink
-                                        to="/login"
-                                        style={style.sidebarLink}
-                                        activeStyle={style.sidebarLinkActive}
-                                    />
-                                }
-                            />
-                            <ListItem
-                                primaryText="Register"
-                                containerElement={
-                                    <NavLink
-                                        to="/register"
-                                        style={style.sidebarLink}
-                                        activeStyle={style.sidebarLinkActive}
-                                    />
-                                }
-                            />
-                        </span>
-                    }
-                </List>
-            </Cell>
+                            }
+                        />
+                    </span>
+                    :
+                    <span>
+                        <ListItem
+                            primaryText="Login"
+                            leftIcon={<Stop color={this.setIconColor("/login")} />}
+                            hoverColor={teal50}
+                            style={this.setNavColor("/login")}
+                            onClick={this.handleActiveLink.bind(null, "/login")}
+                            containerElement={
+                                <NavLink
+                                    to="/login"
+                                />
+                            }
+                        />
+                        <ListItem
+                            primaryText="Register"
+                            leftIcon={<Stop color={this.setIconColor("/register")} />}
+                            hoverColor={teal50}
+                            style={this.setNavColor("/register")}
+                            onClick={this.handleActiveLink.bind(null, "/register")}
+                            containerElement={
+                                <NavLink
+                                    to="/register"
+                                />
+                            }
+                        />
+                    </span>
+                }
+            </List>
         );
     }
-}
+});
+
+export default Sidebar;
