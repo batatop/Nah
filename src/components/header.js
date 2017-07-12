@@ -25,7 +25,6 @@ var Header = createReactClass({
                 context: this,
                 asArray: true,
                 then(user) {
-                    console.log(user);
                     this.setState({
                         name: user[0].name,
                         lastName: user[0].lastName,
@@ -43,7 +42,6 @@ var Header = createReactClass({
                 context: this,
                 asArray: true,
                 then(user) {
-                    console.log(user);
                     this.setState({
                         name: user[0].name,
                         lastName: user[0].lastName,
@@ -55,7 +53,6 @@ var Header = createReactClass({
     },
 
     render: function() {
-        console.log(this.props.authed);
         return (
             <AppBar
                 title="Boento"

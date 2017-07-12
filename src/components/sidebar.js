@@ -24,11 +24,29 @@ var Sidebar = createReactClass({
         if(activeLink === this.state.activeLink){
             return style.sidebarLinkActive;
         }
+        else if(this.state.activeLink === "/" && activeLink === "/dashboard"){
+            return style.sidebarLinkActive;
+        }
+        else if(this.state.activeLink === "/login" && activeLink === "/dashboard" && this.props.authed){
+            return style.sidebarLinkActive;
+        }
+        else if(this.state.activeLink === "/register" && activeLink === "/dashboard" && this.props.authed){
+            return style.sidebarLinkActive;
+        }
         return style.sidebarLink;
     },
 
     setIconColor: function(activeLink){
         if(activeLink === this.state.activeLink){
+            return teal600;
+        }
+        else if(this.state.activeLink === "/" && activeLink === "/dashboard"){
+            return teal600;
+        }
+        else if(this.state.activeLink === "/login" && activeLink === "/dashboard" && this.props.authed){
+            return teal600;
+        }
+        else if(this.state.activeLink === "/register" && activeLink === "/dashboard" && this.props.authed){
             return teal600;
         }
         return grey500;

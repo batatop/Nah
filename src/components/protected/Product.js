@@ -99,7 +99,6 @@ var Product = createReactClass({
     },
 
     render: function() {
-        console.log(this.state.rawMaterials);
         return(
             <Grid>
                 <Cell col={12}>
