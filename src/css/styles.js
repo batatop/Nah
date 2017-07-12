@@ -117,7 +117,7 @@ export const style = {
 
     headerNotifications: {
         position: "absolute",
-        top: "17%",
+        top: "10%",
         right: "35%"
     },
 
@@ -127,11 +127,15 @@ export const style = {
     },
 
     headerBadge: {
-        top: 3,
-        right: 3
+        top: 0,
+        right: 2
     },
 
     headerItem: {
         color: "white"
+    },
+
+    headerDisabledMenuItem: {
+        fontWeight: "bold"
     }
 };
