@@ -57,7 +57,7 @@ var Sidebar = createReactClass({
             <List>
                 {this.props.authed
                     ?
-                    <span>
+                    <span style={style.sidebarLinkContainer}>
                         <ListItem
                             primaryText="Dashboard"
                             leftIcon={<Stop color={this.setIconColor("/dashboard")} />}
@@ -73,7 +73,7 @@ var Sidebar = createReactClass({
                         <ListItem
                             primaryText="Add Product"
                             leftIcon={<Stop color={this.setIconColor("/addProduct")} />}
-                            hoverColor={teal50}
+                            hoverColor={this.state.hoverColor}
                             style={this.setNavColor("/addProduct")}
                             onClick={this.handleActiveLink.bind(null, "/addProduct")}
                             containerElement={
@@ -85,7 +85,7 @@ var Sidebar = createReactClass({
                         <ListItem
                             primaryText="Schedule"
                             leftIcon={<Stop color={this.setIconColor("/schedule")} />}
-                            hoverColor={teal50}
+                            hoverColor={this.state.hoverColor}
                             style={this.setNavColor("/schedule")}
                             onClick={this.handleActiveLink.bind(null, "/schedule")}
                             containerElement={
@@ -97,7 +97,7 @@ var Sidebar = createReactClass({
                         <ListItem
                             primaryText="Raw Materials"
                             leftIcon={<Stop color={this.setIconColor("/rawMaterials")} />}
-                            hoverColor={teal50}
+                            hoverColor={this.state.hoverColor}
                             style={this.setNavColor("/rawMaterials")}
                             onClick={this.handleActiveLink.bind(null, "/rawMaterials")}
                             containerElement={
@@ -109,7 +109,7 @@ var Sidebar = createReactClass({
                         <ListItem
                             primaryText="Staff"
                             leftIcon={<Stop color={this.setIconColor("/staff")} />}
-                            hoverColor={teal50}
+                            hoverColor={this.state.hoverColor}
                             style={this.setNavColor("/staff")}
                             onClick={this.handleActiveLink.bind(null, "/staff")}
                             containerElement={
@@ -121,7 +121,7 @@ var Sidebar = createReactClass({
                         <ListItem
                             primaryText="Logout"
                             leftIcon={<Stop color={this.setIconColor("/logout")} />}
-                            hoverColor={teal50}
+                            hoverColor={this.state.hoverColor}
                             style={this.setNavColor("/logout")}
                             onClick={
                                 () => {
@@ -132,11 +132,11 @@ var Sidebar = createReactClass({
                         />
                     </span>
                     :
-                    <span>
+                    <span style={style.sidebarLinkContainer}>
                         <ListItem
                             primaryText="Login"
                             leftIcon={<Stop color={this.setIconColor("/login")} />}
-                            hoverColor={teal50}
+                            hoverColor={this.state.hoverColor}
                             style={this.setNavColor("/login")}
                             onClick={this.handleActiveLink.bind(null, "/login")}
                             containerElement={
@@ -148,7 +148,7 @@ var Sidebar = createReactClass({
                         <ListItem
                             primaryText="Register"
                             leftIcon={<Stop color={this.setIconColor("/register")} />}
-                            hoverColor={teal50}
+                            hoverColor={this.state.hoverColor}
                             style={this.setNavColor("/register")}
                             onClick={this.handleActiveLink.bind(null, "/register")}
                             containerElement={

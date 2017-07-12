@@ -74,6 +74,12 @@ export const style = {
         backgroundColor: "#E0F2F1"
     },
 
+    sidebarLinkContainer: {
+        position: "absolute",
+        width: "100%",
+        top: "15px"
+    },
+
     // Dashboard
     productModule: {
         width: "100%",
@@ -111,19 +117,18 @@ export const style = {
         width: "100%"
     },
 
-    headerContent: {
-        margin: "12px 0 10px 0"
-    },
-
     headerNotifications: {
         position: "absolute",
         top: "10%",
         right: "35%"
     },
 
+    headerSettings:{
+        position: "absolute"
+    },
+
     headerProfile: {
-        position: "absolute",
-        right: "100%"
+        position: "absolute"
     },
 
     headerBadge: {
