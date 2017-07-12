@@ -73,13 +73,24 @@ var Product = createReactClass({
                     no: (i+1),
                     name: this.state.product[0].rawMaterial[i].name,
                     amount: this.state.product[0].rawMaterial[i].amount+" "+this.state.product[0].rawMaterial[i].unit,
-                    reserved: (this.state.product[0].rawMaterial[i].amount*this.state.product[0].amount)+" "+this.state.product[0].rawMaterial[i].unit,
-                    inStock: this.state.product[0].rawMaterial[i].inStock+" "+this.state.product[0].rawMaterial[i].unit,
+                    reserved: "",
+                    inStock: ""
+                };
+                if(this.state.rawMaterials.length !== 0){
+                    for(var j=0; j<this.state.rawMaterials.length; j++){
+                        // console.log("burda");
+                        // console.log(this.state.product[0].rawMaterial[i]);
+                        // console.log(this.state.product[0].rawMaterial[i].id);
+                        if(this.state.product[0].rawMaterial[i].id === this.state.rawMaterials[j].key){
+                            rawMaterial.reserved = this.state.rawMaterials[j].info.reserved+" "+this.state.rawMaterials[j].info.unit;
+                            rawMaterial.inStock = this.state.rawMaterials[j].info.inStock+" "+this.state.rawMaterials[j].info.unit;
+
+                        }
+                    }
                 }
                 rawMaterialArray.push(rawMaterial);
             }
         }
-
         return rawMaterialArray;
     },
 

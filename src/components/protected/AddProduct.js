@@ -77,17 +77,14 @@ var AddProduct = createReactClass({
                                 for(var j=0; j<self.state.productRawMaterials.length; j++){
                                     if(data[0].name===self.state.productRawMaterials[j].name){
                                         var tempAmount = self.state.amount;
-                                        console.log(isNaN(tempAmount));
-                                        console.log(tempAmount);
                                         if(tempAmount === ""){
-                                            console.log("burda");
                                             tempAmount = 1;
                                         }
                                         else if(isNaN(tempAmount)){
                                             tempAmount = 1;
                                         }
                                         base.update(`rawMaterials/${self.state.productRawMaterials[j].id}/info`, {
-                                            data: {reserved: (parseInt(data[0].reserved, 10) + parseInt(self.state.productRawMaterials[j].amount, 10))*tempAmount},
+                                            data: {reserved: parseInt(data[0].reserved, 10) + (parseInt(self.state.productRawMaterials[j].amount, 10)*tempAmount)},
                                             then(err){
                                                 if(!err){
                                                     self.setState({
