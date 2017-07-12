@@ -2,7 +2,7 @@ import React from "react";
 import createReactClass from "create-react-class";
 import { Link } from "react-router-dom";
 import LinearProgress from 'material-ui/LinearProgress';
-import { Grid, Cell, Card, CardTitle, CardText, CardActions, ProgressBar, IconButton, List, ListItem, ListItemContent, ListItemAction } from "react-mdl";
+import { Grid, Cell, Card, CardTitle, CardText, CardActions, IconButton, List, ListItem, ListItemContent, ListItemAction } from "react-mdl";
 import { base, firebaseAuth } from "../../config/constants";
 import { style } from "../../css/styles.js"
 
