@@ -111,6 +111,26 @@ export const style = {
         width: "100%"
     },
 
+    headerContent: {
+        margin: "12px 0 10px 0"
+    },
+
+    headerNotifications: {
+        position: "absolute",
+        top: "17%",
+        right: "35%"
+    },
+
+    headerProfile: {
+        position: "absolute",
+        right: "100%"
+    },
+
+    headerBadge: {
+        top: 3,
+        right: 3
+    },
+
     headerItem: {
         color: "white"
     }
