@@ -75,9 +75,9 @@ export const style = {
     },
 
     sidebarLinkContainer: {
-        position: "absolute",
-        width: "100%",
-        top: "15px"
+        position: "fixed",
+        width: "25%",
+        top: "75px"
     },
 
     // Dashboard
